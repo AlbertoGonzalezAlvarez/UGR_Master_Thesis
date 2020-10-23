@@ -2,21 +2,14 @@ import dash
 import copy
 from dash.dependencies import Input, Output, State
 
+from App import WebApp
 from config import AppConfig
 from config.AppConfig import INITIAL_LOCATION_ID
 from controllers.Utils import get_page_route
-from views import BaseView, LDAAnalysisView, PartyAnalysisView
+from views import BaseView, LDAAnalysisView, PartyAnalysisView, NotFoundView
 from views.BaseView import MENU_NAV_LINKS
+import controllers.PageControllers.LDAAnalysisController
 
-WebApp = dash.Dash(
-	__name__,
-	external_stylesheets=AppConfig.STYLESHEETS,
-	suppress_callback_exceptions=True,
-	title=AppConfig.APP_TITLE,
-	assets_folder=AppConfig.STATIC_DATA
-)
-
-WebApp.layout = BaseView.layout
 
 @WebApp.callback(
 	[Output('page-content', 'children'), Output('page-nav', 'children')],
@@ -33,4 +26,4 @@ def page_to_render(pathname):
 		page_nav_links['analisis-partidos'].active = True
 		return [PartyAnalysisView.layout, list(page_nav_links.values())]
 
-	return [None, list(MENU_NAV_LINKS.values())]
+	return [NotFoundView.layout, list(MENU_NAV_LINKS.values())]

@@ -2,6 +2,8 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
 
+from App import WebApp
+
 layout = [
 			html.Div(className='justify-content-center row', children=
 				html.Div(className='col-6', children=
@@ -16,7 +18,7 @@ layout = [
 					html.Div(
 						id='embeded',
 						className='embed-responsive embed-responsive-4by3 d-flex justify-content-center align-items-center',
-						children=dbc.Spinner(id='LDAVis_spinner', color="dark")
+						children=html.Embed(src=WebApp.get_asset_url('below_10_above_0.1-model_t15_a051_b001.html'), className='embed-responsive-item')
 					)
 				)
 			])
