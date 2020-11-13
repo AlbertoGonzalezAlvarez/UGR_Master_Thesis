@@ -14,13 +14,14 @@ for page in PAGE_ROUTES:
 layout = html.Div(
 	[
 			html.Meta(name='viewport', content='width=device-width, initial-scale=1'),
-			dcc.Store(id='navigator_memory'),
+			dcc.Store(id='memory_storage'),
+			dcc.Store(id='local_storage', storage_type='local'),
 			dbc.Navbar(color="primary", dark=True, expand='lg', children=[
 				dbc.Col(children=
 					html.A(className='d-inline-flex', href="#", children=
 						dbc.Row(align='center', children=[
 							dbc.Col(children=html.Img(src=APP_LOGO, height='30px')),
-							dbc.NavbarBrand("Anali.sys")
+							dbc.NavbarBrand(children='Anali.sys', id='navbar_brand')
 							],
 						),
 					),
