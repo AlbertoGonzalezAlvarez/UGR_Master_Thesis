@@ -2,7 +2,7 @@ import copy
 import re
 
 from dash import callback_context
-from dash.dependencies import Input, Output, State, MATCH, ALL
+from dash.dependencies import Input, Output, State, MATCH, ALL, ClientsideFunction
 from dash.exceptions import PreventUpdate
 from flask import request
 
@@ -44,24 +44,12 @@ def mobile_checking(_, data):
 	data['mobile'] = len(re.findall(USER_ANGENT_REGEX, request.headers['User_Agent'])) > 0
 	return data
 
-# TODO: separarlo en un fichero .js
+
 WebApp.clientside_callback(
-    """
-    function(n_clicks) {
-    	let collapse_icon;
-    	let open_status;
-    	
-		if(n_clicks == null){
-			return [true, 'far fa-minus-square mr-2 align-self-center'];
-		}
-		
-		collapse_icon = n_clicks % 2 == 0 ? 'far fa-minus-square mr-2 align-self-center' : 
-		'far fa-plus-square mr-2 align-self-center'; 
-		open_status = n_clicks % 2 == 0 ? true : false 
-		
-		return [open_status, collapse_icon];
-	}
-    """,
+    ClientsideFunction(
+        namespace='clientside',
+        function_name='collapse_function'
+    ),
 	[Output({'type': 'collapsible-item', 'ref': MATCH}, "is_open"),
 	Output({'type': 'collapse-icon', 'ref': MATCH}, "className")],
 	Input({'type': 'collapse-button', 'ref': MATCH}, "n_clicks"),

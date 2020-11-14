@@ -15,7 +15,7 @@ layout = html.Div(
 	[
 			html.Meta(name='viewport', content='width=device-width, initial-scale=1'),
 			dcc.Store(id='memory_storage'),
-			dcc.Store(id='local_storage', storage_type='local'),
+			dcc.Store(id='local_storage', storage_type='local', data={}),
 			dbc.Navbar(color="primary", dark=True, expand='lg', children=[
 				dbc.Col(children=
 					html.A(className='d-inline-flex', href="#", children=
