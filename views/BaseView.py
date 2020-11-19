@@ -9,9 +9,9 @@ MENU_NAV_LINKS = {}
 
 for page in PAGE_ROUTES:
 	MENU_NAV_LINKS[page["id"]] = \
-		dbc.NavLink(page['name'], id=f'{NAV_LINK_PREFIX}-{page["id"]}', href=page["route"], active=False)
+		dbc.NavLink(page['name'], id=page["id"], href=page["route"], active=False)
 
-layout = html.Div(
+layout = html.Div(id='main-div', children=
 	[
 			html.Meta(name='viewport', content='width=device-width, initial-scale=1'),
 			dcc.Store(id='memory_storage'),

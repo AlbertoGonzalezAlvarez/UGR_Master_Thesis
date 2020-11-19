@@ -2,7 +2,8 @@ import dash_bootstrap_components as dbc
 import dash_html_components as html
 import dash_core_components as dcc
 
-from config.AppConfig import PARTY_CONFIG
+import controllers
+from config.AppConfig import PARTY_CONFIG, PAGE_ROUTES
 from models import AnalyzedInterventions
 
 parties_info = AnalyzedInterventions.get_parties_info()
@@ -17,11 +18,11 @@ party_info_card_content = [
 				}),
 				html.Span(PARTY_CONFIG[party]["extended_name"]),
 				dbc.Badge(party, style={'color': '#fff', 'backgroundColor': PARTY_CONFIG[party]['color']},
-						  className='align-self-center ml-auto')
+							className='align-self-center ml-auto')
 			],
 			id={
-				 'type': 'collapse-button',
-				 'ref': party
+				'type': 'collapse-button',
+				'ref': party
 			}),
 		]),
 		dbc.Collapse(
@@ -45,20 +46,10 @@ party_info_card_content = [
 				'type': 'collapsible-item',
 				'ref': party
 			},
-			is_open=True,
+			is_open=not controllers.MainController.is_mobile_device,
 		)
 	] for party in PARTY_CONFIG
 ]
-
-psoe_info_card_content = None
-pp_info_card_content = None
-iu_info_card_content = None
-
-party_cards_content = {
-	'pp': psoe_info_card_content,
-	'psoe': pp_info_card_content,
-	'iu': iu_info_card_content
-}
 
 party_info_cards_row = \
 	dbc.Row(className="mb-4 justify-content-center", children=
@@ -75,6 +66,5 @@ party_charts_row = \
 
 		]
 	)
-
 
 layout = party_info_cards_row
