@@ -3,10 +3,35 @@ import dash_html_components as html
 import dash_core_components as dcc
 
 import controllers
-from config.AppConfig import PARTY_CONFIG, PAGE_ROUTES
+from config.AppConfig import PARTY_CONFIG
 from models import AnalyzedInterventions
 
 parties_info = AnalyzedInterventions.get_parties_info()
+party_charts = (
+	{
+		'id': 'topic-chart',
+		'title': 'Temas hablados por partido',
+		'info': ''' En la siguiente gráfica se puede ver el porcentaje de tiempo que 
+					dedican los partidos a los diferentes temas que se tratan. ''',
+		'figure': controllers.PartyAnalysisController.build_topic_chart()
+	},
+	{
+		'id': 'topic-chart-woman-vs-man',
+		'title': 'Temas hablados por sexo',
+		'info': ''' A continuación mostraremos si hay diferencias entre los temas que hablan las 
+					mujeres y los hombres independientemente del partido. Están incluidas las 
+					intervenciones de personas invitadas al parlamento. ''',
+		'figure': controllers.PartyAnalysisController.build_woman_vs_man_chart()
+	},
+	{
+		'id': 'topic-chart-duration',
+		'title': 'Tiempo dedicado a cada tema',
+		'info': ''' A continuación se muestra el porcentaje de tiempo que han dedicado los 
+					parlamentarios en cada una de sus intervenciones a los temas presentados 
+					independientemente del partido al que pertenezcan. ''',
+		'figure': controllers.PartyAnalysisController.build_topic_chart_duration()
+	}
+)
 
 party_info_card_content = [
 	[
@@ -28,7 +53,7 @@ party_info_card_content = [
 		dbc.Collapse(
 			dbc.CardBody(
 				[
-					html.H5('Información general', className='card-title'),
+					html.H5('Información', className='card-title'),
 					html.P(id=f'{party}-card-info', className='card-text', children=
 						[
 							f'- Interevenciones realizadas: {parties_info["n_interventions"][PARTY_CONFIG[party]["gp_name"]]}',
@@ -52,19 +77,37 @@ party_info_card_content = [
 ]
 
 party_info_cards_row = \
-	dbc.Row(className="mb-4 justify-content-center", children=
+	dbc.Row(className='mb-4 justify-content-center', children=
 		[
 			dbc.Col(className='col-lg-3 col-12 mb-3 mb-lg-0', children=[
-				dbc.Card(card_content, color="light")
+				dbc.Card(card_content, color='light')
 			]) for card_content in party_info_card_content
 		],
 	)
 
 party_charts_row = \
-	dbc.Row(className="justify-content-center", children=
+	dbc.Row(className='justify-content-center', children=
 		[
-
+			dbc.Col(className='col-lg-3 col-12 mb-3 mb-lg-0 d-flex flex-column', children=[
+				dbc.Card(outline=True, className='h-100', children=
+					[
+						dbc.CardHeader(children=
+							[
+								html.I(className='fas fa-info-circle mr-2'),
+								html.Span(chart['title']),
+							],
+						),
+						dbc.CardBody(className='d-flex flex-column', children=
+							[
+								html.H5('Información', className='card-title'),
+								html.P(children=chart['info'], className="card-text"),
+								dcc.Graph(id=chart['id'], className='mt-auto', figure=chart['figure'])
+							]
+						)
+					]
+				),
+			]) for chart in party_charts
 		]
 	)
 
-layout = party_info_cards_row
+layout = party_info_cards_row, party_charts_row

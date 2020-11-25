@@ -1,9 +1,9 @@
 import re
-import views
 
-from dash.dependencies import Input, Output, State, MATCH, ALL, ClientsideFunction
+from dash.dependencies import Input, Output, State, MATCH, ClientsideFunction
 from flask import request
 
+import views
 from __init__ import WebApp
 from config.AppConfig import INITIAL_LOCATION_ID, USER_ANGENT_REGEX
 from controllers.Utils import get_page_route

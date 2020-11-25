@@ -3,7 +3,7 @@ from gensim.models import LdaModel
 
 
 lda_model = LdaModel.load('./assets/model_t15_a051_b001/lda.model')
-analyzed_interventions = pd.read_json('./assets/reduced_data_json.gzip', compression='gzip')
+analyzed_interventions = pd.read_json('./assets/analyzed_interventions_separated_cols.gzip', compression='gzip')
 analyzed_interventions['fecha'] = pd.to_datetime(analyzed_interventions['fecha'])
 
 
@@ -28,3 +28,7 @@ def get_parties_info():
 			.value_counts()
 			.divide(n_deputies, fill_value=0.0) * 100
 	}
+
+
+def topic_distribution_per_party():
+	return analyzed_interventions[[f'topic_{i}' for i in range(0, 15)] + ['organizacion']].groupby('organizacion').mean()

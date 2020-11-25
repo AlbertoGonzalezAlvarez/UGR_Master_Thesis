@@ -1,6 +1,3 @@
-from .PageControllers.PartyAnalysisController import *
-from .PageControllers.DeputyAnalysisController import *
-from .PageControllers.LDAAnalysisController import *
-
+from .PageControllers import *
 from .MainController import *
 from .Utils import *
