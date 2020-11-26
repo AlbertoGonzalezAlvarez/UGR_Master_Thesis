@@ -21,6 +21,11 @@ PARTY_CONFIG = {
 	'IU-LV': {'extended_name': 'Izquierda Unida-Los Verdes', 'gp_name': 'G.P. IZQUIERDA UNIDA', 'color': 'rgb(75, 191, 115)'},
 }
 
+SEX_CONFIG = {
+	'H': {'name': 'Hombre', 'color':  'rgb(57, 153, 255)'},
+	'M': {'name': 'Mujer', 'color':  'rgb(255, 57, 102)'},
+}
+
 TOPIC_NAMES = (
 	'Transportes',
 	'Patrimonio',
@@ -38,6 +43,8 @@ TOPIC_NAMES = (
 	'Legislación',
 	'Economía'
 )
+
+N_TOPICS = len(TOPIC_NAMES)
 
 PLOT_BASE_CONFIG = {
 	'font_family': "Nunito Sans",

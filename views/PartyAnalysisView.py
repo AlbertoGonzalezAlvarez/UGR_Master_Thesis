@@ -25,10 +25,13 @@ party_charts = (
 	},
 	{
 		'id': 'topic-chart-duration',
-		'title': 'Tiempo dedicado a cada tema',
-		'info': ''' A continuación se muestra el porcentaje de tiempo que han dedicado los 
-					parlamentarios en cada una de sus intervenciones a los temas presentados 
-					independientemente del partido al que pertenezcan. ''',
+		'title': 'Discurso más largo de cada tema',
+		'info': [
+			'Duración estimada', html.Strong('*'), ' del discurso más largo en cada uno de los temas. También ',
+			'se puede idenfitificar el partido y el diputado que lo realizó.', html.Br(), html.Br(),
+					
+			html.I([html.Strong('*'), 'teniendo en cuenta una velocidad de 140 palabras por minuto'])
+		],
 		'figure': controllers.PartyAnalysisController.build_topic_chart_duration()
 	}
 )
@@ -101,7 +104,7 @@ party_charts_row = \
 							[
 								html.H5('Información', className='card-title'),
 								html.P(children=chart['info'], className="card-text"),
-								dcc.Graph(id=chart['id'], className='mt-auto', figure=chart['figure'])
+								dcc.Graph(id=chart['id'], className='mt-auto', figure=chart['figure']),
 							]
 						)
 					]

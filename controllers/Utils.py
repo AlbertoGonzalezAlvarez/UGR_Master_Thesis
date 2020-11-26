@@ -1,4 +1,16 @@
+import plotly.express as px
 from config.AppConfig import PAGE_ROUTES
+
+COLORS = px.colors.qualitative.Bold + ['#AF0038', '#DDCC77', '#90AD1C'] + px.colors.qualitative.Light24
+
+
+def camel_case_deputy_name(name):
+	return name.replace('-', ' ').title()
+
+
+def get_color(index):
+	size = len(px.colors.qualitative.Bold)
+	return COLORS[index % size]
 
 
 def get_page_name(id):
