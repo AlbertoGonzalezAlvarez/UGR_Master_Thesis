@@ -59,13 +59,13 @@ party_info_card_content = [
 					html.H5('Información', className='card-title'),
 					html.P(id=f'{party}-card-info', className='card-text', children=
 						[
-							f'- Interevenciones realizadas: {parties_info["n_interventions"][PARTY_CONFIG[party]["gp_name"]]}',
+							f'- Interevenciones realizadas: {parties_info["n_interventions"][party]}',
 							html.Br(),
-							f'- Realizadas por mujeres: {parties_info["n_women_interventions"][PARTY_CONFIG[party]["gp_name"]]:.2f}%',
+							f'- Realizadas por mujeres: {parties_info["n_women_interventions"][party]:.2f}%',
 							html.Br(),
-							f'- Número de diputados: {parties_info["n_deputies"][PARTY_CONFIG[party]["gp_name"]]}',
+							f'- Número de diputados: {parties_info["n_deputies"][party]}',
 							html.Br(),
-							f'- Mujeres diputadas: {parties_info["n_women_deputies"][PARTY_CONFIG[party]["gp_name"]]:.2f}%',
+							f'- Mujeres diputadas: {parties_info["n_women_deputies"][party]:.2f}%',
 						]
 					),
 				]

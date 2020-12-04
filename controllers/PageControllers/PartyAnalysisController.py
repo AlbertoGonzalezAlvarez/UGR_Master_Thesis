@@ -79,3 +79,7 @@ def build_topic_chart_duration():
 		)
 	)
 	return figure
+
+
+def build_topic_scores_per_month():
+	pass
