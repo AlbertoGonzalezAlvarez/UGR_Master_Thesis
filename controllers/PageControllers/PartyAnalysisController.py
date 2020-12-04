@@ -10,7 +10,7 @@ def build_topic_chart():
 	figure = go.Figure(data=[
 		go.Bar(
 			x=TOPIC_NAMES,
-			y=data.loc[data.index == PARTY_CONFIG[party_id]['gp_name']].values.squeeze(),
+			y=data.loc[data.index == party_id].values.squeeze(),
 			name=party_id,
 			marker_color=PARTY_CONFIG[party_id]['color'],
 			showlegend=False if controllers.MainController.is_mobile_device else True,
