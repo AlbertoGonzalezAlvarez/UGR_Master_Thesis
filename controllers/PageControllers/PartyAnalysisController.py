@@ -1,11 +1,12 @@
-from plotly import graph_objs as go
 import numpy as np
 import pandas as pd
+from plotly import graph_objs as go
+
 import controllers
-from config.AppConfig import PARTY_CONFIG, TOPIC_NAMES, PLOT_BASE_CONFIG, SEX_CONFIG, N_TOPICS
+from config.AppConfig import PARTY_CONFIG, TOPIC_NAMES, PLOT_BASE_CONFIG, SEX_CONFIG, N_TOPICS, ORG_CONFIG
 from models.AnalyzedInterventions import topic_distribution_per_party, topic_distribution_per_sex, max_time_per_topic, \
 	monthly_topics
-import plotly.express as px
+
 
 def build_topic_chart():
 	data = topic_distribution_per_party()
@@ -92,13 +93,13 @@ def build_topic_scores_per_month():
 		for topic_idx in range(N_TOPICS):
 			figure.add_trace(
 				go.Scatter(
-					x=monthy_topic_scores_per_party[party_id]['fecha'].to_list(),
-					y=monthy_topic_scores_per_party[party_id][f'topic_{topic_idx}'].to_list(),
-					text=monthy_topic_scores_per_party[party_id]['fecha'].to_list(),
+					x=monthy_topic_scores_per_party[party_id].index,
+					y=monthy_topic_scores_per_party[party_id][f'topic_{topic_idx}'],
+					text=monthy_topic_scores_per_party[party_id].index,
 					name=TOPIC_NAMES[topic_idx],
 					yaxis=f'y',
 					visible=False,
-					line=dict(color=px.colors.qualitative.Bold[topic_idx % len(px.colors.qualitative.Bold)]),
+					line=dict(color=controllers.get_color(topic_idx)),
 					hovertemplate=
 					"Mes: %{x}<br>" +
 					"Media de minutos: %{y:.3f}<br>"
@@ -116,25 +117,25 @@ def build_topic_scores_per_month():
 	buttons = [dict(
 		label='Seleccinar partido',
 		method="update",
-		args=[{"visible": [False] * N_TOPICS * len(PARTY_CONFIG)}]
+		args=[{"visible": [False] * N_TOPICS * len(ORG_CONFIG)}]
 	)]
 
 	start_index = 0
-	party_index = 0
+	org_index = 0
 
-	for party in PARTY_CONFIG:
-		visible = [False] * N_TOPICS * len(PARTY_CONFIG)
-		end_index = N_TOPICS * (party_index + 1)
+	for organization in ORG_CONFIG:
+		visible = [False] * N_TOPICS * len(ORG_CONFIG)
+		end_index = N_TOPICS * (org_index + 1)
 		visible[start_index:end_index] = [True] * N_TOPICS
 
 		buttons.append(
 			dict(
-				label=party,
+				label=organization,
 				method="update",
 				args=[{"visible": visible.copy()}]
 			)
 		)
-		party_index += 1
+		org_index += 1
 		start_index = end_index
 
 	figure.layout.update(
@@ -151,11 +152,9 @@ def build_topic_scores_per_month():
 	figure.layout.update(
 		xaxis=dict(
 			autorange=True,
-			tickformat='%m-%Y',
 			rangeslider=dict(
 				autorange=True,
 			),
-			type="date"
 		),
 		yaxis=dict(
 			anchor="x",

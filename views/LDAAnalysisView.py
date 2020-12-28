@@ -1,6 +1,6 @@
 import dash_html_components as html
 
-from __init__ import WebApp
+from WebApp import WebApp
 
 layout = [
 			html.Div(className='justify-content-center row', children=
