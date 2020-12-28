@@ -76,5 +76,3 @@ def monthly_topics(computation_function):
 			.combine_first(initialized_df).reindex(initialized_df.index)
 
 	return party_monthly_data
-
-monthly_topics(pd.DataFrame.mean)

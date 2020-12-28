@@ -89,7 +89,7 @@ party_info_cards_row = \
 	)
 
 party_charts_row = \
-	dbc.Row(className='justify-content-center', children=
+	dbc.Row(className='justify-content-center mb-3', children=
 		[
 			dbc.Col(className='col-lg-3 col-12 mb-3 mb-lg-0 d-flex flex-column', children=[
 				dbc.Card(outline=True, className='h-100', children=
@@ -104,7 +104,7 @@ party_charts_row = \
 							[
 								html.H5('Información', className='card-title'),
 								html.P(children=chart['info'], className="card-text"),
-								dcc.Graph(id=chart['id'], className='mt-auto', figure=chart['figure']),
+								dcc.Graph(id=chart['id'], figure=chart['figure']),
 							]
 						)
 					]
@@ -113,4 +113,38 @@ party_charts_row = \
 		]
 	)
 
-layout = party_info_cards_row, party_charts_row
+party_evolution = dbc.Row(className="justify-content-center", children=
+				[
+					dbc.Col(className='col-9 d-none d-lg-block mt-4', children=
+						dbc.Card(
+							dbc.CardBody(
+								[
+									html.H4("Serie de tiempo dedicado a cada tema", className="card-title"),
+									html.P(
+										'Analizamos los temas de los que han hablado los diferentes partidos a lo largo de la legislatura '
+										'para poder estudiar el porcentaje de intervenciones dedicados a cada uno de ellos.'),
+									# dbc.InputGroup(
+									# 	[
+									# 		dbc.DropdownMenu(
+									# 			dropdown_menu_items, label="Generate", addon_type="prepend"
+									# 		),
+									# 	]
+									# ),
+									# html.Div(
+									# 	dcc.Dropdown(
+									# 		id="dropdown",
+									# 		options=[
+									# 			{"label": "Option 1", "value": 1},
+									# 			{"label": "Option 2", "value": 2},
+									# 		],
+									# 	),
+									# ),
+									dbc.Spinner(dcc.Graph(id='topic-chart-start-end', figure=controllers.PartyAnalysisController.build_topic_scores_per_month()), color="dark")
+								]
+							)
+						)
+					)
+				]
+			)
+
+layout = party_info_cards_row, party_charts_row, party_evolution
