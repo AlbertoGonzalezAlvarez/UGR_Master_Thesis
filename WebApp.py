@@ -13,9 +13,9 @@ WebApp = dash.Dash(
 )
 
 WebApp.layout = BaseView.layout
+server = WebApp.server
 
 from controllers.MainController import *
-from controllers.PageControllers.PartyAnalysisController import *
 
 if __name__ == "__main__":
 	WebApp.run_server(debug=True)
