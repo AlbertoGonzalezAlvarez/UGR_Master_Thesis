@@ -18,4 +18,4 @@ server = WebApp.server
 from controllers.MainController import *
 
 if __name__ == "__main__":
-	WebApp.run_server(debug=True)
+	WebApp.run_server(debug=False)
