@@ -1,5 +1,7 @@
-from plotly import graph_objs as go
 import numpy as np
+from plotly import graph_objs as go
+
+import WebApp
 import controllers
 from config.AppConfig import PARTY_CONFIG, TOPIC_NAMES, PLOT_BASE_CONFIG, SEX_CONFIG, N_TOPICS
 from models.AnalyzedInterventions import topic_distribution_per_party, topic_distribution_per_sex, max_time_per_topic
@@ -13,14 +15,14 @@ def build_topic_chart():
 			y=data.loc[data.index == party_id].values.squeeze(),
 			name=party_id,
 			marker_color=PARTY_CONFIG[party_id]['color'],
-			showlegend=False if controllers.MainController.is_mobile_device else True,
+			showlegend=False if WebApp.is_mobile_device else True,
 			hovertemplate='Porcentaje de tiempo: %{y:.2f}<br>'
 		) for party_id in PARTY_CONFIG],
 		layout=dict(
 			barmode='group',
 			margin=dict(l=0, r=40, t=40),
-			xaxis_title='' if controllers.MainController.is_mobile_device else 'Temas',
-			yaxis_title='' if controllers.MainController.is_mobile_device else 'Porcentaje de tiempo',
+			xaxis_title='' if WebApp.is_mobile_device else 'Temas',
+			yaxis_title='' if WebApp.is_mobile_device else 'Porcentaje de tiempo',
 			**PLOT_BASE_CONFIG
 		)
 	)
@@ -36,14 +38,14 @@ def build_woman_vs_man_chart():
 			y=data.loc[data.index == sex_id].values.squeeze(),
 			name=SEX_CONFIG[sex_id]['name'],
 			marker_color=SEX_CONFIG[sex_id]['color'],
-			showlegend=False if controllers.MainController.is_mobile_device else True,
+			showlegend=False if WebApp.is_mobile_device else True,
 			hovertemplate='Porcentaje de tiempo: %{y:.2f}<br>'
 		) for sex_id in SEX_CONFIG],
 		layout=dict(
 			barmode='group',
 			margin=dict(l=0, r=40, t=40),
-			xaxis_title='' if controllers.MainController.is_mobile_device else 'Temas',
-			yaxis_title='' if controllers.MainController.is_mobile_device else 'Porcentaje de tiempo',
+			xaxis_title='' if WebApp.is_mobile_device else 'Temas',
+			yaxis_title='' if WebApp.is_mobile_device else 'Porcentaje de tiempo',
 			**PLOT_BASE_CONFIG
 		)
 	)
@@ -73,8 +75,8 @@ def build_topic_chart_duration():
 			barmode='group',
 			hoverlabel_align='left',
 			margin=dict(l=0, r=40, t=40),
-			xaxis_title='' if controllers.MainController.is_mobile_device else 'Temas',
-			yaxis_title='' if controllers.MainController.is_mobile_device else 'Minutos estimados',
+			xaxis_title='' if WebApp.is_mobile_device else 'Temas',
+			yaxis_title='' if WebApp.is_mobile_device else 'Minutos estimados',
 			**PLOT_BASE_CONFIG
 		)
 	)
