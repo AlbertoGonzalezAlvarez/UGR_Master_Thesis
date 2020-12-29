@@ -3,7 +3,7 @@ from dash import dash
 from config import AppConfig
 from views import BaseView
 
-WebApp = dash.Dash(
+app = dash.Dash(
 	__name__,
 	external_stylesheets=AppConfig.STYLESHEETS,
 	suppress_callback_exceptions=True,
@@ -12,10 +12,10 @@ WebApp = dash.Dash(
 	assets_folder=AppConfig.STATIC_DATA
 )
 
-WebApp.layout = BaseView.layout
-server = WebApp.server
+app.layout = BaseView.layout
+server = app.server
 
 from controllers.MainController import *
 
 if __name__ == "__main__":
-	WebApp.run_server(debug=False)
+	app.run_server(debug=False)

@@ -4,13 +4,13 @@ from dash.dependencies import Input, Output, State, MATCH, ClientsideFunction
 from flask import request
 
 import views
-from WebApp import WebApp
+from WebApp import app
 from config.AppConfig import INITIAL_LOCATION_ID, USER_ANGENT_REGEX
 from controllers.Utils import get_page_route
 
 is_mobile_device = None
 
-@WebApp.callback(
+@app.callback(
 	Output('page-content', 'children'),
 	Output('page-nav', 'children'),
 	Input('url', 'pathname'),
@@ -38,7 +38,7 @@ def page_to_render(pathname, menu_links):
 	return layout, menu_links
 
 
-WebApp.clientside_callback(
+app.clientside_callback(
 	ClientsideFunction(
 		namespace='clientside',
 		function_name='collapse_function'
