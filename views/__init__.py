@@ -1,5 +1,8 @@
-from .BaseView import layout
-from .PartyAnalysisView import layout
-from .LDAAnalysisView import layout
-from .NotFoundView import layout
+import views.BaseView
+import views.LDAAnalysisView
+import views.NotFoundView
+import views.PartyAnalysisView
+
 #from .DeputyAnalysisView import layout
+
+DEFAULT_VIEW = BaseView.layout

@@ -1,14 +1,10 @@
-import re
-
 import dash
 from dash.dependencies import Input, Output, State, MATCH, ClientsideFunction
-from flask import request
 
 import views
 from config import AppConfig
-from config.AppConfig import INITIAL_LOCATION_ID, USER_ANGENT_REGEX
+from config.AppConfig import INITIAL_LOCATION_ID
 from controllers.Utils import get_page_route
-from views import BaseView
 
 app = dash.Dash(
 	__name__,
@@ -19,7 +15,7 @@ app = dash.Dash(
 	assets_folder=AppConfig.STATIC_DATA
 )
 
-app.layout = BaseView.layout
+app.layout = views.BaseView.layout
 server = app.server
 is_mobile_device = None
 
@@ -30,8 +26,6 @@ is_mobile_device = None
 	State('page-nav', 'children'),
 )
 def page_to_render(pathname, menu_links):
-	is_mobile_device = len(re.findall(USER_ANGENT_REGEX, request.headers['User_Agent'])) > 0
-
 	if pathname == '/' or pathname == '' or pathname == get_page_route(INITIAL_LOCATION_ID):
 		layout = views.LDAAnalysisView.layout
 		actual_location = INITIAL_LOCATION_ID
