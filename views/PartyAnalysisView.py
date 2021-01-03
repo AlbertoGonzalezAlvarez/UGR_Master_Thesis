@@ -2,7 +2,7 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 
-import WebApp
+import WebApplication
 import controllers
 from config.AppConfig import PARTY_CONFIG
 from models import AnalyzedInterventions
@@ -75,7 +75,7 @@ party_info_card_content = [
 				'type': 'collapsible-item',
 				'ref': party
 			},
-			is_open=not WebApp.is_mobile_device,
+			is_open=not WebApplication.is_mobile_device,
 		)
 	] for party in PARTY_CONFIG
 ]
