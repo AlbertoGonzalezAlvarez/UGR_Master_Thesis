@@ -1,10 +1,10 @@
 import dash
 from dash.dependencies import Input, Output, State, MATCH, ClientsideFunction
 
-import views
 from config import AppConfig
 from config.AppConfig import INITIAL_LOCATION_ID
 from controllers.Utils import get_page_route
+from views import BaseView
 
 app = dash.Dash(
 	__name__,
@@ -15,7 +15,7 @@ app = dash.Dash(
 	assets_folder=AppConfig.STATIC_DATA
 )
 
-app.layout = views.BaseView.layout
+app.layout = BaseView.layout
 server = app.server
 is_mobile_device = None
 
@@ -27,13 +27,16 @@ is_mobile_device = None
 )
 def page_to_render(pathname, menu_links):
 	if pathname == '/' or pathname == '' or pathname == get_page_route(INITIAL_LOCATION_ID):
-		layout = views.LDAAnalysisView.layout
+		from views import LDAAnalysisView
+		layout = LDAAnalysisView.layout
 		actual_location = INITIAL_LOCATION_ID
 	elif pathname == get_page_route('analisis-partidos'):
-		layout = views.PartyAnalysisView.layout
+		from views import PartyAnalysisView
+		layout = PartyAnalysisView.layout
 		actual_location = 'analisis-partidos'
 	else:
-		layout = views.NotFoundView.layout
+		from views import NotFoundView
+		layout = NotFoundView.layout
 		actual_location = None
 
 	for menu_item in menu_links:
