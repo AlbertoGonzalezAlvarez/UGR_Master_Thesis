@@ -4,7 +4,7 @@ from dash.dependencies import Input, Output, State, MATCH, ClientsideFunction
 from config import AppConfig
 from config.AppConfig import INITIAL_LOCATION_ID
 from controllers.Utils import get_page_route
-from views import BaseView
+from views.BaseView import layout
 
 app = dash.Dash(
 	__name__,
@@ -15,7 +15,7 @@ app = dash.Dash(
 	assets_folder=AppConfig.STATIC_DATA
 )
 
-app.layout = BaseView.layout
+app.layout = layout
 server = app.server
 is_mobile_device = None
 
