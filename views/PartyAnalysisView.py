@@ -1,6 +1,6 @@
 import dash_bootstrap_components as dbc
-import dash_html_components as html
 import dash_core_components as dcc
+import dash_html_components as html
 
 import controllers
 from config.AppConfig import PARTY_CONFIG
@@ -82,16 +82,16 @@ party_info_card_content = [
 party_info_cards_row = \
 	dbc.Row(className='mb-4 justify-content-center', children=
 		[
-			dbc.Col(className='col-lg-3 col-12 mb-3 mb-lg-0', children=[
+			dbc.Col(className='col-lg-4 col-12 mb-4 mb-lg-0', children=[
 				dbc.Card(card_content, color='light')
 			]) for card_content in party_info_card_content
 		],
 	)
 
 party_charts_row = \
-	dbc.Row(className='justify-content-center mb-3', children=
+	dbc.Row(className='justify-content-center mb-4', children=
 		[
-			dbc.Col(className='col-lg-3 col-12 mb-3 mb-lg-0 d-flex flex-column', children=[
+			dbc.Col(className='col-lg-4 col-12 mb-3 mb-lg-0 d-flex flex-column', children=[
 				dbc.Card(outline=True, className='h-100', children=
 					[
 						dbc.CardHeader(children=
@@ -115,7 +115,7 @@ party_charts_row = \
 
 party_evolution = dbc.Row(className="justify-content-center", children=
 				[
-					dbc.Col(className='col-9 d-none d-lg-block mt-4', children=
+					dbc.Col(className='col mb-4', children=
 						dbc.Card(
 							dbc.CardBody(
 								[
@@ -123,23 +123,45 @@ party_evolution = dbc.Row(className="justify-content-center", children=
 									html.P(
 										'Analizamos los temas de los que han hablado los diferentes partidos a lo largo de la legislatura '
 										'para poder estudiar el porcentaje de intervenciones dedicados a cada uno de ellos.'),
-									# dbc.InputGroup(
-									# 	[
-									# 		dbc.DropdownMenu(
-									# 			dropdown_menu_items, label="Generate", addon_type="prepend"
-									# 		),
-									# 	]
-									# ),
-									# html.Div(
-									# 	dcc.Dropdown(
-									# 		id="dropdown",
-									# 		options=[
-									# 			{"label": "Option 1", "value": 1},
-									# 			{"label": "Option 2", "value": 2},
-									# 		],
-									# 	),
-									# ),
-									dbc.Spinner(dcc.Graph(id='topic-chart-start-end', figure=controllers.PartyAnalysisController.build_topic_scores_per_month()), color="dark")
+									dbc.InputGroup(
+										[
+											dbc.DropdownMenu(
+												[
+													dbc.DropdownMenuItem("Item 1"),
+													dbc.DropdownMenuItem("Item 2"),
+													dbc.DropdownMenuItem("Item 3"),
+												], label="Generate", addon_type="prepend", className='select-dropdown'
+											),
+											dbc.Input(id="input-group-dropdown-input", placeholder="name"),
+											dcc.Dropdown(
+												options=[
+													{'label': 'New York City', 'value': 'NYC'},
+													{'label': 'Montreal', 'value': 'MTL'},
+													{'label': 'San Francisco', 'value': 'SF'}
+												],
+											value=['MTL', 'NYC'],
+											multi=True,
+											placeholder='Seleccionar temas',
+											# style={'minWidth': '15em'}
+											),
+										]
+									),
+									dbc.Input(id="input-group-dropdown-input", placeholder="name"),
+									dcc.Dropdown(
+										options=[
+											{'label': 'New York City', 'value': 'NYC'},
+											{'label': 'Montreal', 'value': 'MTL'},
+											{'label': 'San Francisco', 'value': 'SF'}
+										],
+										value=['MTL', 'NYC'],
+										multi=True,
+										placeholder='Seleccionar temas',
+									),
+									html.Div(className='mb-5'),
+									dbc.Row([
+										dbc.Col(dcc.Graph(id='monthly-data-left'), lg=6, width=12),
+										dbc.Col(dcc.Graph(id='monthly-data-right'), lg=6, width=12)
+									])
 								]
 							)
 						)
