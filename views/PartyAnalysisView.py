@@ -3,7 +3,7 @@ import dash_core_components as dcc
 import dash_html_components as html
 
 import controllers
-from config.AppConfig import PARTY_CONFIG
+from config.AppConfig import PARTY_CONFIG, TOPIC_NAMES
 from models import AnalyzedInterventions
 
 parties_info = AnalyzedInterventions.get_parties_info()
@@ -44,9 +44,8 @@ party_info_card_content = [
 					'type': 'collapse-icon',
 					'ref': party
 				}),
-				html.Span(PARTY_CONFIG[party]["extended_name"]),
-				dbc.Badge(party, style={'color': '#fff', 'backgroundColor': PARTY_CONFIG[party]['color']},
-							className='align-self-center ml-auto')
+				html.Span(PARTY_CONFIG[party]['extended_name']),
+				dbc.Badge(party, className=f'align-self-center ml-auto {party}')
 			],
 			id={
 				'type': 'collapse-button',
@@ -113,55 +112,103 @@ party_charts_row = \
 		]
 	)
 
-party_evolution = dbc.Row(className="justify-content-center", children=
+party_evolution = dbc.Row(className='justify-content-center', children=
 				[
 					dbc.Col(className='col mb-4', children=
 						dbc.Card(
 							dbc.CardBody(
 								[
-									html.H4("Serie de tiempo dedicado a cada tema", className="card-title"),
+									html.H4('Serie de tiempo dedicado a cada tema', className='card-title'),
 									html.P(
 										'Analizamos los temas de los que han hablado los diferentes partidos a lo largo de la legislatura '
 										'para poder estudiar el porcentaje de intervenciones dedicados a cada uno de ellos.'),
-									dbc.InputGroup(
-										[
-											dbc.DropdownMenu(
-												[
-													dbc.DropdownMenuItem("Item 1"),
-													dbc.DropdownMenuItem("Item 2"),
-													dbc.DropdownMenuItem("Item 3"),
-												], label="Generate", addon_type="prepend", className='select-dropdown'
-											),
-											dbc.Input(id="input-group-dropdown-input", placeholder="name"),
-											dcc.Dropdown(
-												options=[
-													{'label': 'New York City', 'value': 'NYC'},
-													{'label': 'Montreal', 'value': 'MTL'},
-													{'label': 'San Francisco', 'value': 'SF'}
-												],
-											value=['MTL', 'NYC'],
-											multi=True,
-											placeholder='Seleccionar temas',
-											# style={'minWidth': '15em'}
-											),
-										]
-									),
-									dbc.Input(id="input-group-dropdown-input", placeholder="name"),
-									dcc.Dropdown(
-										options=[
-											{'label': 'New York City', 'value': 'NYC'},
-											{'label': 'Montreal', 'value': 'MTL'},
-											{'label': 'San Francisco', 'value': 'SF'}
-										],
-										value=['MTL', 'NYC'],
-										multi=True,
-										placeholder='Seleccionar temas',
-									),
-									html.Div(className='mb-5'),
 									dbc.Row([
-										dbc.Col(dcc.Graph(id='monthly-data-left'), lg=6, width=12),
-										dbc.Col(dcc.Graph(id='monthly-data-right'), lg=6, width=12)
-									])
+										dbc.Col(
+											dbc.InputGroup(
+												[
+													html.Div(
+														dbc.DropdownMenu(
+															[
+																dbc.DropdownMenuItem(
+																	party,
+																	key=party,
+																	id={
+																		'type': 'dd-party',
+																		'loc': 'left',
+																		'ref': party
+																	}
+																) for party in PARTY_CONFIG
+															],
+															label='Partido',
+															addon_type='prepend',
+															className='select-dropdown',
+															id={
+																'id': 'dd-parties',
+																'loc': 'left',
+															}
+														),
+													className='d-flex',
+													id={'id': 'dd-parties-div', 'loc': 'left'}
+													),
+													dcc.Dropdown(
+														options=[
+															{'label': topic, 'value': idx} for idx, topic in enumerate(TOPIC_NAMES)
+														],
+													multi=True,
+													id={'id': 'dd-topics', 'loc': 'left'},
+													placeholder='Seleccionar temas',
+													value=None
+													),
+												]
+											),
+										className='border-right'
+										),
+										dbc.Col(
+											dbc.InputGroup(
+												[
+													html.Div(
+														dbc.DropdownMenu(
+															[
+																dbc.DropdownMenuItem(
+																	party,
+																	key=party,
+																	id={
+																		'type': 'dd-party',
+																		'loc': 'right',
+																		'ref': party
+																	}
+																) for party in PARTY_CONFIG
+															],
+															label='Partido',
+															addon_type='prepend',
+															className='select-dropdown',
+															id={
+																'id': 'dd-parties',
+																'loc': 'right',
+															}
+														),
+														className='d-flex',
+														id={'id': 'dd-parties-div', 'loc': 'right'}
+													),
+													dcc.Dropdown(
+														options=[
+															{'label': topic, 'value': idx} for idx, topic in enumerate(TOPIC_NAMES)
+														],
+														multi=True,
+														id={'id': 'dd-topics', 'loc': 'right'},
+														placeholder='Seleccionar temas',
+														value=None
+													),
+												]
+											),
+										),
+									],
+									className='pt-3'),
+									dbc.Row([
+										dbc.Col(dcc.Graph(id={'id': 'monthly-data', 'loc': 'left'}), lg=6, width=12,
+										        className='border-right'),
+										dbc.Col(dcc.Graph(id={'id': 'monthly-data', 'loc': 'right'}), lg=6, width=12)
+									]),
 								]
 							)
 						)

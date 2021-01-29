@@ -50,7 +50,9 @@ def max_time_per_topic():
 		].iloc[analyzed_interventions[[f'topic_{i}_time' for i in range(0, N_TOPICS)]].idxmax()]
 
 
-def monthly_topics(computation_function):
+def monthly_topics():
+	computation_function = pd.DataFrame.mean
+
 	date_range = analyzed_interventions.fecha.dt.strftime("%B-%Y").transform(string.capwords).unique()
 	data_columns = {
 		**{f'topic_{i}': 0 for i in range(0, N_TOPICS)}

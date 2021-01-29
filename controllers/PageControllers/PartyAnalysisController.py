@@ -1,9 +1,14 @@
+import json
+
+import dash_bootstrap_components as dbc
 import numpy as np
-import pandas as pd
+from dash import callback_context
+from dash.dependencies import Output, Input, MATCH, ALL
 from plotly import graph_objs as go
 
 import controllers
-from config.AppConfig import PARTY_CONFIG, TOPIC_NAMES, PLOT_BASE_CONFIG, SEX_CONFIG, N_TOPICS, ORG_CONFIG
+from WebApp import WebApp
+from config.AppConfig import PARTY_CONFIG, TOPIC_NAMES, PLOT_BASE_CONFIG, SEX_CONFIG, N_TOPICS
 from models.AnalyzedInterventions import topic_distribution_per_party, topic_distribution_per_sex, max_time_per_topic, \
 	monthly_topics
 
@@ -85,26 +90,25 @@ def build_topic_chart_duration():
 	return figure
 
 
-def build_topic_scores_per_month():
-	monthy_topic_scores_per_party = monthly_topics(pd.DataFrame.mean)
+def topic_scores_per_month(party, topics):
+	monthy_topic_scores_per_party = monthly_topics()
 	figure = go.Figure()
 
-	for party_id in monthy_topic_scores_per_party:
-		for topic_idx in range(N_TOPICS):
-			figure.add_trace(
-				go.Scatter(
-					x=monthy_topic_scores_per_party[party_id].index,
-					y=monthy_topic_scores_per_party[party_id][f'topic_{topic_idx}'],
-					text=monthy_topic_scores_per_party[party_id].index,
-					name=TOPIC_NAMES[topic_idx],
-					yaxis=f'y',
-					visible=False,
-					line=dict(color=controllers.get_color(topic_idx)),
-					hovertemplate=
-					"Mes: %{x}<br>" +
-					"Media de minutos: %{y:.3f}<br>"
-				)
+	for topic_idx in topics:
+		figure.add_trace(
+			go.Scatter(
+				x=monthy_topic_scores_per_party[party].index,
+				y=monthy_topic_scores_per_party[party][f'topic_{topic_idx}'],
+				text=monthy_topic_scores_per_party[party].index,
+				name=TOPIC_NAMES[topic_idx],
+				yaxis=f'y',
+				visible=True,
+				line=dict(color=controllers.get_color(topic_idx)),
+				hovertemplate=
+				"Mes: %{x}<br>" +
+				"Media de minutos: %{y:.3f}<br>"
 			)
+		)
 
 	figure.update_traces(
 		hoverinfo="name+x+text+y",
@@ -112,40 +116,6 @@ def build_topic_scores_per_month():
 		marker={"size": 10},
 		mode="lines+markers",
 		showlegend=False
-	)
-
-	buttons = [dict(
-		label='Seleccinar partido',
-		method="update",
-		args=[{"visible": [False] * N_TOPICS * len(ORG_CONFIG)}]
-	)]
-
-	start_index = 0
-	org_index = 0
-
-	for organization in ORG_CONFIG:
-		visible = [False] * N_TOPICS * len(ORG_CONFIG)
-		end_index = N_TOPICS * (org_index + 1)
-		visible[start_index:end_index] = [True] * N_TOPICS
-
-		buttons.append(
-			dict(
-				label=organization,
-				method="update",
-				args=[{"visible": visible.copy()}]
-			)
-		)
-		org_index += 1
-		start_index = end_index
-
-	figure.layout.update(
-		updatemenus=[
-			dict(
-				active=0,
-				buttons=buttons,
-				showactive=True,
-			)
-		],
 	)
 
 	# Update axes
@@ -182,6 +152,78 @@ def build_topic_scores_per_month():
 			t=100,
 			b=100
 		),
+	)
+
+	return figure
+
+
+@WebApp.callback(
+	Output({'id': 'dd-parties-div', 'loc': MATCH}, 'children'),
+	Input({'type': 'dd-party', 'loc': MATCH, 'ref': ALL}, 'n_clicks'),
+	prevent_initial_call=True
+)
+def update_party_dropdown(_):
+	fired_prop_id = callback_context.triggered[0]['prop_id']
+	selected_party = fired_prop_id.split('.')[0]
+	data = json.loads(selected_party)
+	actual_party = data['ref']
+
+	dropdown_menu = dbc.DropdownMenu(
+		[
+			dbc.DropdownMenuItem(
+				party,
+				key=party,
+				id={
+					'type': 'dd-party',
+					'loc': data['loc'],
+					'ref': party
+				}
+			) for party in PARTY_CONFIG if party != actual_party
+		],
+		label=actual_party,
+		addon_type='prepend',
+		className='select-dropdown',
+		id={
+			'id': 'dd-parties',
+			'loc': data['loc'],
+		}
+	)
+
+	return dropdown_menu
+
+
+@WebApp.callback(
+	Output({'id': 'monthly-data', 'loc': MATCH}, 'figure'),
+	Input({'id': 'dd-topics', 'loc': MATCH}, 'value'),
+	Input({'id': 'dd-parties', 'loc': MATCH}, 'label'),
+)
+def update_monthly_graph(topics, actual_party):
+	if topics and actual_party in PARTY_CONFIG:
+		return topic_scores_per_month(actual_party, topics)
+
+	figure = go.Figure()
+	figure.layout.update(
+		{
+			"xaxis": {
+				"visible": False
+			},
+			"yaxis": {
+				"visible": False
+			},
+			"annotations": [
+				{
+					"text": "Selecciona un partido y al menos un tema",
+					"xref": "paper",
+					"yref": "paper",
+					"showarrow": False,
+					"font": {
+						"size": 28
+					}
+				}
+			],
+			"height": 1000,
+			"margin": dict(t=100, b=100)
+		}
 	)
 
 	return figure

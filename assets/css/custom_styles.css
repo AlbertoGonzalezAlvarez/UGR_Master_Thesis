@@ -1,3 +1,18 @@
+.PSOE {
+    color: rgb(255, 255, 255);
+    background-color: rgb(217, 83, 79);
+}
+
+.PP {
+    color: rgb(255, 255, 255);
+    background-color: rgb(31, 155, 207);
+}
+
+.IU-LV {
+    color: rgb(255, 255, 255);
+    background-color: rgb(75, 191, 115);
+}
+
 .footer{
     margin-top:auto;
     bottom: 0;
@@ -38,6 +53,7 @@
 
 
 .input-group .dash-dropdown {
+    margin-left: 3px;
     -ms-flex: 1;
     flex: 1;
 }
@@ -206,6 +222,7 @@
     font-size: .9em;
     line-height: 1.4;
     vertical-align: top;
+    margin-top: 3px;
 }
 
 .Select--multi .Select-value-icon {
