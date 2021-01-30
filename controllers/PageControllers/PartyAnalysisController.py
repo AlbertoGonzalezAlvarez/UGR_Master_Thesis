@@ -182,6 +182,7 @@ def update_party_dropdown(_):
 		],
 		label=actual_party,
 		addon_type='prepend',
+		color=f'{actual_party}',
 		className='select-dropdown',
 		id={
 			'id': 'dd-parties',

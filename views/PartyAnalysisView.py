@@ -4,6 +4,7 @@ import dash_html_components as html
 
 import controllers
 from config.AppConfig import PARTY_CONFIG, TOPIC_NAMES
+from controllers import filter_special_characters
 from models import AnalyzedInterventions
 
 parties_info = AnalyzedInterventions.get_parties_info()
@@ -136,7 +137,7 @@ party_evolution = dbc.Row(className='justify-content-center', children=
 																		'type': 'dd-party',
 																		'loc': 'left',
 																		'ref': party
-																	}
+																	},
 																) for party in PARTY_CONFIG
 															],
 															label='Partido',
@@ -152,7 +153,11 @@ party_evolution = dbc.Row(className='justify-content-center', children=
 													),
 													dcc.Dropdown(
 														options=[
-															{'label': topic, 'value': idx} for idx, topic in enumerate(TOPIC_NAMES)
+															{
+																'label': topic,
+															    'value': idx,
+																'title': filter_special_characters(topic)
+															} for idx, topic in enumerate(TOPIC_NAMES)
 														],
 													multi=True,
 													id={'id': 'dd-topics', 'loc': 'left'},
@@ -176,7 +181,7 @@ party_evolution = dbc.Row(className='justify-content-center', children=
 																		'type': 'dd-party',
 																		'loc': 'right',
 																		'ref': party
-																	}
+																	},
 																) for party in PARTY_CONFIG
 															],
 															label='Partido',
@@ -192,13 +197,16 @@ party_evolution = dbc.Row(className='justify-content-center', children=
 													),
 													dcc.Dropdown(
 														options=[
-															{'label': topic, 'value': idx} for idx, topic in enumerate(TOPIC_NAMES)
+															{
+																'label': topic,
+															    'value': idx,
+																'title': filter_special_characters(topic)
+															 } for idx, topic in enumerate(TOPIC_NAMES)
 														],
 														multi=True,
 														id={'id': 'dd-topics', 'loc': 'right'},
 														placeholder='Seleccionar temas',
-														value=None
-													),
+														value=None													),
 												]
 											),
 										),

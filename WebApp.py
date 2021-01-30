@@ -9,7 +9,7 @@ WebApp = dash.Dash(
 	suppress_callback_exceptions=True,
 	update_title=None,
 	title=AppConfig.APP_TITLE,
-	assets_folder=AppConfig.STATIC_DATA
+	# assets_folder=AppConfig.STATIC_DATA
 )
 
 WebApp.layout = BaseView.layout

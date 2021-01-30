@@ -1,10 +1,13 @@
+import os
+
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CUSTOM_STYLES = 'assets/css/custom_styles.css'
 APP_LOGO = "https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/bar-chart-512.png"
 STYLESHEETS = [
 	'https://use.fontawesome.com/releases/v5.8.1/css/all.css'
 ]
 
 APP_TITLE = 'Anali.sys'
-STATIC_DATA = './assets'
 USER_ANGENT_REGEX = '(?i)adnroid|fennec|iemobile|iphone|opera (?:mini|mobi)|mobile'
 INITIAL_LOCATION_ID = 'analisis-lda'
 
