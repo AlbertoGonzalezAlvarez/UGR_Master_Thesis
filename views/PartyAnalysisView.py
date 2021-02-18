@@ -115,7 +115,7 @@ party_charts_row = \
 
 party_evolution = dbc.Row(className='justify-content-center', children=
 				[
-					dbc.Col(className='col mb-4', children=
+					dbc.Col(children=
 						dbc.Card(
 							dbc.CardBody(
 								[

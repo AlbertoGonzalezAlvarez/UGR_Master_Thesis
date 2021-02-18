@@ -1,6 +1,6 @@
 import dash_bootstrap_components as dbc
-import dash_html_components as html
 import dash_core_components as dcc
+import dash_html_components as html
 
 from config.AppConfig import APP_LOGO, PAGE_ROUTES
 
@@ -36,7 +36,7 @@ layout = html.Div(id='main-div', children=
 				id='page-content',
 				className='mt-4 text-justify container-fluid'
 			),
-			html.Footer(className='footer', children=
+			html.Footer(className='footer mt-4', children=
 				html.Div(className='text-center', children=
 					[
 						'Made with ❤️ by ',

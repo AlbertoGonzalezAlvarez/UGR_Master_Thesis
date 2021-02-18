@@ -58,6 +58,12 @@ def build_woman_vs_man_chart():
 	figure.layout.update(
 		template='lux',
 		barmode='group',
+		legend=dict(
+			yanchor="top",
+			y=0.99,
+			xanchor="left",
+			x=0.01
+		),
 		xaxis_title='' if controllers.MainController.is_mobile_device else 'Temas',
 		yaxis_title='' if controllers.MainController.is_mobile_device else 'Porcentaje de tiempo',
 	)
@@ -105,6 +111,10 @@ def topic_scores_per_month():
 					y=monthy_topic_scores_per_party[party_id][f'topic_{topic_idx}'],
 					text=monthy_topic_scores_per_party[party_id].index,
 					line=dict(color=TOPIC_NAMES[topic_name]),
+					hovertemplate=
+					f'<b>{topic_name}</b><br>' +
+					'Media de minutos: %{y:.3f}<br>'
+					'<extra></extra>',
 				)
 			)
 
@@ -112,10 +122,6 @@ def topic_scores_per_month():
 		mode='lines+markers',
 		showlegend=False,
 		visible=False,
-		hovertemplate=
-		'Mes: %{x}<br>' +
-		'Media de minutos: %{y:.3f}<br>'
-		'<extra></extra>',
 	)
 
 	figure.layout.update(
@@ -142,10 +148,9 @@ def topic_scores_per_month():
 @WebApp.callback(
 	Output({'id': 'dd-parties-div', 'loc': MATCH}, 'children'),
 	Input({'type': 'dd-party', 'loc': MATCH, 'ref': ALL}, 'n_clicks'),
-	State({'id': 'monthly-data', 'loc': MATCH}, 'figure'),
 	prevent_initial_call=True
 )
-def update_party_dropdown(_, figure_status):
+def update_party_dropdown(_):
 	fired_prop_id = callback_context.triggered[0]['prop_id']
 	selected_party = fired_prop_id.split('.')[0]
 	data = json.loads(selected_party)
@@ -197,7 +202,7 @@ def update_monthly_graph(topics, actual_party, figure):
 			figure['data'][idx]['visible'] = True
 
 		figure['layout'].update(
-			plot_bgcolor=controllers.rgb_to_rgba(PARTY_CONFIG[actual_party]['color'], 0.1)
+			plot_bgcolor=controllers.rgb_to_rgba(PARTY_CONFIG[actual_party]['color'], 0.05)
 		)
 
 		return figure, dict(display='block'), dict(display='none'), dict(display='none')

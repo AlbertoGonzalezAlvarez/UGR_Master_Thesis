@@ -27,8 +27,8 @@ ORG_CONFIG = {
 PARTY_CONFIG = {org_id: ORG_CONFIG[org_id] for org_id in ORG_CONFIG if ORG_CONFIG[org_id]['is_party']}
 
 SEX_CONFIG = {
-	'H': {'name': 'Hombre', 'color':  'rgb(57, 153, 255)'},
-	'M': {'name': 'Mujer', 'color':  'rgb(255, 57, 102)'},
+	'H': {'name': 'Hombre', 'color':  '#778AAE'},
+	'M': {'name': 'Mujer', 'color':  '#862A16'},
 }
 
 TOPIC_NAMES = {
