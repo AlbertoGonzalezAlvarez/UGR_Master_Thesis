@@ -31,28 +31,22 @@ SEX_CONFIG = {
 	'M': {'name': 'Mujer', 'color':  'rgb(255, 57, 102)'},
 }
 
-TOPIC_NAMES = (
-	'Transportes',
-	'Patrimonio',
-	'Sanidad',
-	'Acceso a la vivienda',
-	'Justicia',
-	'TV pública',
-	'Actividad parlamentaria',
-	'Protección social',
-	'Agricultura',
-	'Cultura',
-	'Educación',
-	'Crítica parlamentaria',
-	'Transparencia',
-	'Legislación',
-	'Economía'
-)
+TOPIC_NAMES = {
+	'Transportes': 'rgb(127, 60, 141)',
+	'Patrimonio': 'rgb(17, 165, 121)',
+	'Sanidad': 'rgb(57, 105, 172)',
+	'Acceso a la vivienda': 'rgb(242, 183, 1)',
+	'Justicia': 'rgb(231, 63, 116)',
+	'TV pública': 'rgb(128, 186, 90)',
+	'Actividad parlamentaria': 'rgb(230, 131, 16)',
+	'Protección social': 'rgb(0, 134, 149)',
+	'Cultura': 'rgb(207, 28, 144)',
+	'Agricultura': 'rgb(249, 123, 114)',
+	'Educación': 'rgb(165, 170, 153)',
+	'Crítica parlamentaria': '#AF0038',
+	'Transparencia': '#DDCC77',
+	'Legislación': '#90AD1C',
+	'Economía': '#FD3216'
+}
 
 N_TOPICS = len(TOPIC_NAMES)
-
-PLOT_BASE_CONFIG = {
-	'font_family': "Nunito Sans",
-	'title_font_family': "Nunito Sans",
-	'xaxis_tickangle': -45,
-}
