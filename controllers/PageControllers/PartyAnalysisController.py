@@ -5,6 +5,8 @@ import numpy as np
 from dash import callback_context
 from dash.dependencies import Output, Input, MATCH, ALL, State
 from plotly import graph_objs as go
+import views.templates.plotly_lux_template
+import plotly.io as pio
 
 import controllers
 from WebApp import WebApp
