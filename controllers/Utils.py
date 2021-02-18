@@ -1,26 +1,18 @@
-import plotly.express as px
 import unidecode
 
 from config.AppConfig import PAGE_ROUTES, CUSTOM_STYLES, TOPIC_NAMES, ROOT_DIR
-
-COLORS = px.colors.qualitative.Bold + ['#AF0038', '#DDCC77', '#90AD1C'] + px.colors.qualitative.Light24
 
 
 def camel_case_deputy_name(name):
 	return name.replace('-', ' ').title()
 
 
-def get_color(index, transparency=100):
-	size = len(px.colors.qualitative.Bold)
-
-	if transparency == 100:
-		return COLORS[index % size]
-
-	return COLORS[index % size].replace(')', f', {transparency}%)')
-
-
 def filter_special_characters(chain):
 	return unidecode.unidecode(chain.replace(' ', ''))
+
+
+def rgb_to_rgba(rgb_value, alpha):
+	return f"rgba{rgb_value[3:-1]}, {alpha})"
 
 
 def generate_css_colors():
@@ -29,10 +21,11 @@ def generate_css_colors():
 
 	for idx, topic in enumerate(TOPIC_NAMES):
 		style += f'.Select-value[title={filter_special_characters(topic)}] {{\n' \
-						f'    background-color: {get_color(idx)}; \n' \
+						f'    background-color: {TOPIC_NAMES[topic]}; \n' \
 						f'}}\n\n' \
 						f'.Select-value[title={filter_special_characters(topic)}] > .Select-value-icon {{\n' \
 						f'    background-color: inherit;\n' \
+						f'    border-right: none;\n' \
 						f'}}\n\n' \
 						f'.Select-value[title={filter_special_characters(topic)}] > .Select-value-label {{\n' \
 						f'    background-color: rgb(255 255 255 / 80%);\n' \
