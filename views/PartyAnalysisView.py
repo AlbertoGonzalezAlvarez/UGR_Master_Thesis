@@ -206,16 +206,56 @@ party_evolution = dbc.Row(className='justify-content-center', children=
 														multi=True,
 														id={'id': 'dd-topics', 'loc': 'right'},
 														placeholder='Seleccionar temas',
-														value=None													),
+														value=None
+													),
 												]
 											),
 										),
 									],
 									className='pt-3'),
 									dbc.Row([
-										dbc.Col(dcc.Graph(id={'id': 'monthly-data', 'loc': 'left'}), lg=6, width=12,
-										        className='border-right'),
-										dbc.Col(dcc.Graph(id={'id': 'monthly-data', 'loc': 'right'}), lg=6, width=12)
+										dbc.Col(
+											lg=6,
+											width=12,
+											className='border-right text-center',
+											children=[
+												html.I(
+													className='fas fa-exclamation-triangle fa-3x text-warning mt-3 mb-3',
+													id={'id': 'warning', 'loc': 'left'},
+												),
+												html.H4(
+													id={'id': 'select-data', 'loc': 'left'},
+													children='Selecciona al menos un tema y un partido',
+													style=dict(display='block')
+												),
+												dcc.Graph(
+													id={'id': 'monthly-data', 'loc': 'left'},
+													figure=controllers.topic_scores_per_month(),
+													style=dict(display='None')
+												),
+											]
+										),
+										dbc.Col(
+											lg=6,
+											width=12,
+											className='text-center',
+											children=[
+												html.I(
+													className='fas fa-exclamation-triangle fa-3x text-warning mt-3 mb-3',
+													id={'id': 'warning', 'loc': 'right'},
+												),
+												html.H4(
+													id={'id': 'select-data', 'loc': 'right'},
+													children='Selecciona al menos un tema y un partido',
+													style=dict(display='block')
+												),
+												dcc.Graph(
+													id={'id': 'monthly-data', 'loc': 'right'},
+													figure=controllers.topic_scores_per_month(),
+													style=dict(display='None')
+												)
+											]
+										)
 									]),
 								]
 							)
