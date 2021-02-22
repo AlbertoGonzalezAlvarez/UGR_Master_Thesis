@@ -9,7 +9,7 @@ WebApp = dash.Dash(
 	suppress_callback_exceptions=True,
 	update_title=None,
 	title=AppConfig.APP_TITLE,
-	# assets_folder=AppConfig.STATIC_DATA
+	meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
 
 WebApp.layout = BaseView.layout
@@ -18,4 +18,4 @@ server = WebApp.server
 from controllers.MainController import *
 
 if __name__ == "__main__":
-	WebApp.run_server(debug=True)
+	WebApp.run_server(debug=True, port=80)

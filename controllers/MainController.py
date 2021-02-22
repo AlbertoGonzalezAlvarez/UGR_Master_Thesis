@@ -5,10 +5,9 @@ from flask import request
 
 import views
 from WebApp import WebApp
-from config.AppConfig import INITIAL_LOCATION_ID, USER_ANGENT_REGEX
-from controllers.Utils import get_page_route
+from config import INITIAL_LOCATION_ID, USER_ANGENT_REGEX
+from controllers import get_page_route
 
-is_mobile_device = None
 
 @WebApp.callback(
 	Output('page-content', 'children'),
@@ -17,8 +16,6 @@ is_mobile_device = None
 	State('page-nav', 'children'),
 )
 def page_to_render(pathname, menu_links):
-	is_mobile_device = len(re.findall(USER_ANGENT_REGEX, request.headers['User_Agent'])) > 0
-
 	if pathname == '/' or pathname == '' or pathname == get_page_route(INITIAL_LOCATION_ID):
 		layout = views.LDAAnalysisView.layout
 		actual_location = INITIAL_LOCATION_ID
@@ -36,6 +33,19 @@ def page_to_render(pathname, menu_links):
 			menu_item['props']['active'] = False
 
 	return layout, menu_links
+
+
+@WebApp.callback(
+	Output('mobile_device', 'data'),
+	Input('url', 'pathname'),
+	State('mobile_device', 'data')
+)
+def mobile_device(_, data):
+	data = data or {
+		'mobile_device': len(re.findall(USER_ANGENT_REGEX, request.headers['User_Agent'])) > 0
+	}
+
+	return data
 
 
 @WebApp.callback(

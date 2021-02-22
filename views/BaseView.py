@@ -2,9 +2,8 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 
-from config.AppConfig import APP_LOGO, PAGE_ROUTES
+from config import APP_LOGO, PAGE_ROUTES
 
-NAV_LINK_PREFIX = 'menu-link'
 MENU_NAV_LINKS = {}
 
 for page in PAGE_ROUTES:
@@ -14,9 +13,7 @@ for page in PAGE_ROUTES:
 layout = html.Div(id='main-div', children=
 	[
 			html.Meta(name='viewport', content='width=device-width, initial-scale=1'),
-			dcc.Store(id='memory_storage'),
-			dcc.Store(id='local_storage', storage_type='local', data={}),
-			dbc.Navbar(color="primary", dark=True, expand='lg', children=[
+			dbc.Navbar(color='primary', fixed='top', sticky='fixed', dark=True, expand='lg', children=[
 				dbc.Col(children=
 					html.A(className='d-inline-flex', href="#", children=
 						dbc.Row(align='center', children=[
@@ -34,15 +31,16 @@ layout = html.Div(id='main-div', children=
 			dcc.Location(id='url', refresh=False),
 			html.Div(
 				id='page-content',
-				className='mt-4 text-justify container-fluid'
+				className='mt-4 mb-4 text-justify container-fluid'
 			),
-			html.Footer(className='footer mt-4', children=
+			html.Footer(className='footer', children=
 				html.Div(className='text-center', children=
 					[
 						'Made with ❤️ by ',
 						html.A(href='https://www.linkedin.com/in/alberto-gonzalez-alvarez/', children='Alberto González')
 					]
 				)
-			)
+			),
+			dcc.Store(id='mobile_device', storage_type='session'),
 	]
 )

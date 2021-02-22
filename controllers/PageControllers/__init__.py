@@ -1,3 +1,3 @@
-from controllers.PageControllers.PartyAnalysisController import *
-from controllers.PageControllers.LDAAnalysisController import *
-from controllers.PageControllers.DeputyAnalysisController import *
+from .PartyAnalysisController import *
+from .LDAAnalysisController import *
+from .DeputyAnalysisController import *

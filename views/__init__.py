@@ -1,5 +1,8 @@
-from .BaseView import layout
-from .PartyAnalysisView import layout
-from .LDAAnalysisView import layout
-from .NotFoundView import layout
-#from .DeputyAnalysisView import layout
+from .BaseView import *
+from .templates.plotly_lux_template import *
+from .PartyAnalysisView import *
+from .LDAAnalysisView import *
+from .NotFoundView import *
+import plotly.io as pio
+
+pio.templates.default = 'lux'

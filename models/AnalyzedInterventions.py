@@ -3,7 +3,7 @@ import string
 
 import pandas as pd
 
-from config.AppConfig import N_TOPICS
+from config import N_TOPICS
 
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 

@@ -13,7 +13,7 @@ layout = [
 				)
 			),
 			html.Div(className="justify-content-md-center", children=[
-				html.Div(className='col-sm-6 mx-auto', children=
+				html.Div(className='col-sm-8 mx-auto', children=
 					html.Div(
 						id='embeded',
 						className='embed-responsive embed-responsive-4by3 d-flex justify-content-center align-items-center',

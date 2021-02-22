@@ -4,28 +4,26 @@ import dash_bootstrap_components as dbc
 import numpy as np
 from dash import callback_context
 from dash.dependencies import Output, Input, MATCH, ALL, State
+from dash.exceptions import PreventUpdate
 from plotly import graph_objs as go
-import views.templates.plotly_lux_template
-import plotly.io as pio
 
-import controllers
+from controllers import rgb_to_rgba
 from WebApp import WebApp
-from config.AppConfig import PARTY_CONFIG, TOPIC_NAMES, SEX_CONFIG, N_TOPICS
-from models.AnalyzedInterventions import topic_distribution_per_party, topic_distribution_per_sex, max_time_per_topic, \
-	monthly_topics
+from config import AppConfig
+from models import AnalyzedInterventions
 
 
 def build_topic_chart():
-	data = topic_distribution_per_party()
+	data = AnalyzedInterventions.topic_distribution_per_party()
 	figure = go.Figure()
 
-	for party_id in PARTY_CONFIG:
+	for party_id in AppConfig.PARTY_CONFIG:
 		figure.add_trace(
 			go.Bar(
-				x=list(TOPIC_NAMES.keys()),
+				x=list(AppConfig.TOPIC_NAMES.keys()),
 				y=data.loc[data.index == party_id].values.squeeze(),
 				name=party_id,
-				marker_color=PARTY_CONFIG[party_id]['color'],
+				marker_color=AppConfig.PARTY_CONFIG[party_id]['color'],
 				hovertemplate='Porcentaje de tiempo: %{y:.2f}<br>',
 			)
 		)
@@ -34,25 +32,24 @@ def build_topic_chart():
 		template='lux',
 		barmode='group',
 		showlegend=False,
-		xaxis_title='' if controllers.MainController.is_mobile_device else 'Temas',
-		yaxis_title='' if controllers.MainController.is_mobile_device else 'Porcentaje de tiempo',
+		xaxis_title='Temas',
+		yaxis_title='Porcentaje de tiempo',
 	)
 
 	return figure
 
 
 def build_woman_vs_man_chart():
-	data = topic_distribution_per_sex()
+	data = AnalyzedInterventions.topic_distribution_per_sex()
 	figure = go.Figure()
 
-	for sex_id in SEX_CONFIG:
+	for sex_id in AppConfig.SEX_CONFIG:
 		figure.add_trace(
 			go.Bar(
-				x=list(TOPIC_NAMES.keys()),
+				x=list(AppConfig.TOPIC_NAMES.keys()),
 				y=data.loc[data.index == sex_id].values.squeeze(),
-				name=SEX_CONFIG[sex_id]['name'],
-				marker_color=SEX_CONFIG[sex_id]['color'],
-				showlegend=False if controllers.MainController.is_mobile_device else True,
+				name=AppConfig.SEX_CONFIG[sex_id]['name'],
+				marker_color=AppConfig.SEX_CONFIG[sex_id]['color'],
 				hovertemplate='Porcentaje de tiempo: %{y:.2f}<br>'
 			)
 		)
@@ -66,21 +63,21 @@ def build_woman_vs_man_chart():
 			xanchor="left",
 			x=0.01
 		),
-		xaxis_title='' if controllers.MainController.is_mobile_device else 'Temas',
-		yaxis_title='' if controllers.MainController.is_mobile_device else 'Porcentaje de tiempo',
+		xaxis_title='Temas',
+		yaxis_title='Porcentaje de tiempo',
 	)
 
 	return figure
 
 
 def build_topic_chart_duration():
-	data = max_time_per_topic()
+	data = AnalyzedInterventions.max_time_per_topic()
 	figure = go.Figure(
 		go.Bar(
-			x=list(TOPIC_NAMES.keys()),
-			y=list(np.diag(data[[f'topic_{i}_time' for i in range(0, N_TOPICS)]])),
-			marker_color=list(TOPIC_NAMES.values()),
-			customdata=list(zip( data['fecha'], data['diputado'].apply(str.title), data['organizacion'])),
+			x=list(AppConfig.TOPIC_NAMES.keys()),
+			y=list(np.diag(data[[f'topic_{i}_time' for i in range(0, AppConfig.N_TOPICS)]])),
+			marker_color=list(AppConfig.TOPIC_NAMES.values()),
+			customdata=list(zip(data['fecha'], data['diputado'].apply(str.title), data['organizacion'])),
 			hovertemplate=
 			'<b>Tema: %{x}</b><br><br>' +
 			'Fecha: %{customdata[0]|%d-%m-%y}<br>' +
@@ -94,25 +91,25 @@ def build_topic_chart_duration():
 	figure.layout.update(
 		template='lux',
 		barmode='group',
-		xaxis_title='' if controllers.MainController.is_mobile_device else 'Temas',
-		yaxis_title='' if controllers.MainController.is_mobile_device else 'Minutos estimados',
+		xaxis_title='Temas',
+		yaxis_title='Minutos estimados',
 	)
 
 	return figure
 
 
 def topic_scores_per_month():
-	monthy_topic_scores_per_party = monthly_topics()
+	monthy_topic_scores_per_party = AnalyzedInterventions.monthly_topics()
 	figure = go.Figure()
 
 	for party_id in monthy_topic_scores_per_party:
-		for topic_idx, topic_name in enumerate(TOPIC_NAMES):
+		for topic_idx, topic_name in enumerate(AppConfig.TOPIC_NAMES):
 			figure.add_trace(
 				go.Scatter(
 					x=monthy_topic_scores_per_party[party_id].index,
 					y=monthy_topic_scores_per_party[party_id][f'topic_{topic_idx}'],
 					text=monthy_topic_scores_per_party[party_id].index,
-					line=dict(color=TOPIC_NAMES[topic_name]),
+					line=dict(color=AppConfig.TOPIC_NAMES[topic_name]),
 					hovertemplate=
 					f'<b>{topic_name}</b><br>' +
 					'Media de minutos: %{y:.3f}<br>'
@@ -168,7 +165,7 @@ def update_party_dropdown(_):
 					'loc': data['loc'],
 					'ref': party
 				}
-			) for party in PARTY_CONFIG if party != actual_party
+			) for party in AppConfig.PARTY_CONFIG if party != actual_party
 		],
 		label=actual_party,
 		addon_type='prepend',
@@ -193,20 +190,39 @@ def update_party_dropdown(_):
 	State({'id': 'monthly-data', 'loc': MATCH}, 'figure'),
 )
 def update_monthly_graph(topics, actual_party, figure):
-	if topics and actual_party in PARTY_CONFIG:
-		party_scatter_start = len(TOPIC_NAMES) * list(PARTY_CONFIG).index(actual_party)
+	if topics and actual_party in AppConfig.PARTY_CONFIG:
+		party_scatter_start = len(AppConfig.TOPIC_NAMES) * list(AppConfig.PARTY_CONFIG).index(actual_party)
+		figure['layout']['xaxis']['rangeslider']['yaxis'].pop('_template', None)
 
-		for idx in range(len(figure['data'])):
-			figure['data'][idx]['visible'] = False
+		fig = go.Figure(figure)
+		fig.update_traces(visible=False)
 
-		for topic_idx in topics:
-			idx = topic_idx + party_scatter_start
-			figure['data'][idx]['visible'] = True
+		for idx in topics:
+			fig.data[idx + party_scatter_start].visible = True
 
-		figure['layout'].update(
-			plot_bgcolor=controllers.rgb_to_rgba(PARTY_CONFIG[actual_party]['color'], 0.05)
+		fig.layout.update(
+			plot_bgcolor=rgb_to_rgba(AppConfig.PARTY_CONFIG[actual_party]['color'], 0.05)
 		)
 
-		return figure, dict(display='block'), dict(display='none'), dict(display='none')
+		return fig, dict(display='block'), dict(display='none'), dict(display='none')
 
 	return figure, dict(display='none'), dict(display='block'), dict(display='block')
+
+
+@WebApp.callback(
+	Output('evolution-mobile-warning', 'style'),
+	Output('evolution-selectors', 'style'),
+	Output('evolution-figures', 'style'),
+	Input('mobile_device', 'modified_timestamp'),
+	State('mobile_device', 'data'),
+	State('evolution-mobile-warning', 'style'),
+)
+def on_mobile_evolution(_, data, warning_style):
+	is_mobile = data['mobile_device']
+
+	if not is_mobile:
+		raise PreventUpdate
+
+	warning_style.update(display='block')
+
+	return warning_style, dict(display='none'), dict(display='none')
