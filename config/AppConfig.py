@@ -9,10 +9,10 @@ STYLESHEETS = [
 
 APP_TITLE = 'Anali.sys'
 USER_ANGENT_REGEX = '(?i)adnroid|fennec|iemobile|iphone|opera (?:mini|mobi)|mobile'
-INITIAL_LOCATION_ID = 'analisis-lda'
+INITIAL_LOCATION_ID = 'inicio'
 
 PAGE_ROUTES = (
-	{'id': 'analisis-lda', 'route': '/analisis-lda', 'name': 'Análisis de LDA'},
+	{'id': 'inicio', 'route': '/inicio', 'name': 'Inicio'},
 	{'id': 'analisis-partidos', 'route': '/analisis-partidos', 'name': 'Análisis de partidos'},
 	{'id': 'analisis-diputados', 'route': '/analisis-diputados', 'name': 'Análisis de diputados'}
 )

@@ -79,7 +79,7 @@ party_info_card_content = [
 ]
 
 party_info_cards_row = \
-	dbc.Row(className='mb-4 justify-content-center', children=
+	dbc.Row(className='mt-4 mb-4 justify-content-center', children=
 		[
 			dbc.Col(className='col-lg-4 col-12 mb-4 mb-lg-0', children=[
 				dbc.Card(card_content, color='light')
@@ -109,7 +109,7 @@ party_charts_row = \
 		]
 	)
 
-party_evolution = dbc.Row(className='justify-content-center', children=
+party_evolution = dbc.Row(className='justify-content-center mb-4', children=
 				[
 					dbc.Col(children=
 						dbc.Card(

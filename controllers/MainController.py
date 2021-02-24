@@ -12,17 +12,21 @@ from controllers import get_page_route
 @WebApp.callback(
 	Output('page-content', 'children'),
 	Output('page-nav', 'children'),
+	Output('header', 'children'),
 	Input('url', 'pathname'),
 	State('page-nav', 'children'),
 )
 def page_to_render(pathname, menu_links):
 	if pathname == '/' or pathname == '' or pathname == get_page_route(INITIAL_LOCATION_ID):
-		layout = views.LDAAnalysisView.layout
-		actual_location = INITIAL_LOCATION_ID
+		header = views.InitView.header
+		layout = views.InitView.layout
+		actual_location = 'inicio'
 	elif pathname == get_page_route('analisis-partidos'):
+		header = None
 		layout = views.PartyAnalysisView.layout
 		actual_location = 'analisis-partidos'
 	else:
+		header = None
 		layout = views.NotFoundView.layout
 		actual_location = None
 
@@ -32,7 +36,7 @@ def page_to_render(pathname, menu_links):
 		else:
 			menu_item['props']['active'] = False
 
-	return layout, menu_links
+	return layout, menu_links, header
 
 
 @WebApp.callback(

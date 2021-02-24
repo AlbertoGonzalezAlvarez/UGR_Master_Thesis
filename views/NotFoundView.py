@@ -1,4 +1,3 @@
 import dash_html_components as html
-import dash_core_components as dcc
 
-layout = html.Div('Página no encontrada')
+layout = html.Div(className='mt-4', children='Página no encontrada')
