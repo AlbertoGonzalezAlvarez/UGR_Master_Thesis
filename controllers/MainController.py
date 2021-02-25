@@ -25,6 +25,10 @@ def page_to_render(pathname, menu_links):
 		header = None
 		layout = views.PartyAnalysisView.layout
 		actual_location = 'analisis-partidos'
+	elif pathname == get_page_route('analisis-diputados'):
+		header = None
+		layout = views.WorkingView.layout
+		actual_location = 'analisis-diputados'
 	else:
 		header = None
 		layout = views.NotFoundView.layout

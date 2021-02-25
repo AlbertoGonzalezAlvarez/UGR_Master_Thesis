@@ -2,7 +2,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 
-header = html.Header(className='bg-logo py-5 mb-5', children=
+header = html.Header(className='bg-green py-5 mb-5', children=
 	dbc.Container(className='container-fliud h-100', children=
 		dbc.Row(className='h-100 align-items-center', children=
 			dbc.Col(lg=12, children=[
@@ -18,7 +18,7 @@ header = html.Header(className='bg-logo py-5 mb-5', children=
 	)
 )
 layout = [
-	html.Video(id='init-video', autoPlay=True, muted=True, loop=True, src='assets/data_science.mp4'),
+	html.Video(id='init-video', autoPlay=True, muted=True, loop=True, src='assets/media/data_science.mp4'),
 	dbc.Container([
 		dbc.Row(className='justify-content-around', children=[
 			dbc.Col(className='mb-5 bg-white-65 p-4', md=8, children=[
@@ -49,7 +49,7 @@ layout = [
 				]),
 				html.P(children=[
 					html.I(className='fab fa-linkedin mr-2 align-self-center'),
-					html.A('LinkedIn', href="https://www.linkedin.com/in/alberto-gonzalez-alvarez/")
+					html.A('LinkedIn', href='https://www.linkedin.com/in/alberto-gonzalez-alvarez/')
 				]),
 				html.P(children=[
 					html.I(className='fas fa-envelope mr-2 align-self-center'),
@@ -60,43 +60,46 @@ layout = [
 		dbc.Row([
 			dbc.Col(className='mb-5', md=4, children=[
 				dbc.Card(className='bg-white-65', children=[
-					dbc.CardImg(src="https://placehold.it/300x200", top=True),
+					dbc.CardImg(src='https://placehold.it/300x200', top=True),
 					dbc.CardBody([
-						html.H4("Card title", className="card-title"),
-						html.P(
-							"Some quick example text to build on the card title and "
-							"make up the bulk of the card's content.",
-							className="card-text bg-white-50",
+						html.H4('Card 1', className='card-title'),
+						html.P(className='card-text bg-white-50', children=
+							'''
+								Lorem ipsum dolor sit amet consectetur adipiscing, elit cursus vel accumsan pulvinar,
+								justo malesuada morbi phasellus.
+							'''
 						),
-						dbc.Button("Go somewhere", color="primary"),
+						dbc.Button('Go somewhere', color='primary'),
 					]),
 				])
 			]),
 			dbc.Col(className='mb-5', md=4, children=[
 				dbc.Card(className='bg-white-65', children=[
-					dbc.CardImg(src="https://placehold.it/300x200", top=True),
+					dbc.CardImg(src='https://placehold.it/300x200', top=True),
 					dbc.CardBody([
-						html.H4("Card title", className="card-title"),
-						html.P(
-							"Some quick example text to build on the card title and "
-							"make up the bulk of the card's content.",
-							className="card-text bg-white-50",
+						html.H4('Card 2', className='card-title'),
+						html.P(className='card-text bg-white-50', children=
+							'''
+								Lorem ipsum dolor sit amet consectetur adipiscing, elit cursus vel accumsan pulvinar,
+								justo malesuada morbi phasellus.
+							'''
 						),
-						dbc.Button("Go somewhere", color="primary"),
+						dbc.Button('Go somewhere', color='primary'),
 					]),
 				])
 			]),
 			dbc.Col(className='mb-5', md=4, children=[
 				dbc.Card(className='bg-white-65', children=[
-					dbc.CardImg(src="https://placehold.it/300x200", top=True),
+					dbc.CardImg(src='https://placehold.it/300x200', top=True),
 					dbc.CardBody([
-						html.H4("Card title", className="card-title"),
-						html.P(
-							"Some quick example text to build on the card title and "
-							"make up the bulk of the card's content.",
-							className="card-text bg-white-50",
+						html.H4('Card 3', className='card-title'),
+						html.P(className='card-text bg-white-50', children=
+							'''
+								Lorem ipsum dolor sit amet consectetur adipiscing, elit cursus vel accumsan pulvinar,
+								justo malesuada morbi phasellus.
+							''',
 						),
-						dbc.Button("Go somewhere", color="primary"),
+						dbc.Button('Go somewhere', color='primary'),
 					]),
 				])
 			]),

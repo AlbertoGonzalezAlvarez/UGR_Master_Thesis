@@ -17,7 +17,7 @@ layout = html.Div(id='main-div', children=
 				dbc.Col(children=
 					html.A(className='d-inline-flex', href="#", children=
 						dbc.Row(align='center', children=[
-							dbc.NavbarBrand(children=html.Img(id='logo-image', src='assets/logo.png', style=dict(height='35px')))
+							dbc.NavbarBrand(children=html.Img(id='logo-image', src='assets/media/logo.png', style=dict(height='35px')))
 							],
 						),
 					),

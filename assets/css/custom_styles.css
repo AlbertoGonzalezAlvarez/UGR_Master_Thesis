@@ -1,23 +1,32 @@
-.bg-logo {
-    background-color: #4ca16eba !important
+.bg-green {
+    background-color: #4ca16eba !important;
 }
+
+.text-green {
+    color: #4ca16eba !important;
+}
+
+.under-construction-icon {
+    content: url(https://cdn2.iconfinder.com/data/icons/thesquid-ink-40-free-flat-icon-pack/64/barricade-64.png);
+    width: 24px;
+    height: 24px;
+}
+
+
 
 .bg-white-65 {
-  background-color: rgb(255 255 255 / 0.65) !important
+  background-color: rgb(255 255 255 / 0.65) !important;
 }
 
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
-/*
-#video-overlay {
-    background-image: radial-gradient(#212121 10%, transparent 20%);
-    background-size: 3px 3px;
-    min-height: 100%;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    min-width: 100%;
+.animation-rotate {
+    -webkit-animation: spin 4s linear infinite;
+    -moz-animation: spin 4s linear infinite;
+    animation: spin 4s linear infinite;
 }
-*/
 
 #init-video {
     position: fixed;
