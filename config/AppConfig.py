@@ -3,9 +3,9 @@ import os
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CUSTOM_STYLES = 'assets/css/custom_styles.css'
 APP_LOGO = "https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/bar-chart-512.png"
-STYLESHEETS = [
-	'https://use.fontawesome.com/releases/v5.8.1/css/all.css'
-]
+
+EXTERNAL_STYLESHEETS = ['https://use.fontawesome.com/releases/v5.8.1/css/all.css']
+EXTERNAL_SCRIPTS = ['https://code.jquery.com/jquery-3.5.1.min.js']
 
 APP_TITLE = 'Anali.sys'
 USER_ANGENT_REGEX = '(?i)adnroid|fennec|iemobile|iphone|opera (?:mini|mobi)|mobile'

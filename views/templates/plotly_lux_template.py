@@ -1,7 +1,12 @@
 import plotly.express as px
 import plotly.io as pio
 
-axis_style = dict(
+pio.templates['lux'] = pio.templates['plotly']
+pio.templates['lux'].layout.font.update(family='Nunito Sans')
+pio.templates['lux'].layout.plot_bgcolor = None
+pio.templates['lux'].layout.paper_bgcolor = 'white'
+pio.templates['lux'].layout.margin.update(l=0, r=0, t=40, b=0)
+pio.templates['lux'].layout.xaxis.update(
 	mirror=True,
 	ticks='outside',
 	gridcolor='rgba(0, 0, 0, 0.125)',
@@ -10,16 +15,20 @@ axis_style = dict(
 	zeroline=True,
 	showgrid=True,
 	gridwidth=1,
-	zerolinewidth=2
+	zerolinewidth=2,
+	tickangle=-45
 )
-
-pio.templates['lux'] = pio.templates['plotly']
-pio.templates['lux'].layout.font.update(family='Nunito Sans')
-pio.templates['lux'].layout.plot_bgcolor = None
-pio.templates['lux'].layout.paper_bgcolor = 'white'
-pio.templates['lux'].layout.margin.update(l=0, r=40, t=40)
-pio.templates['lux'].layout.xaxis.update(axis_style)
-pio.templates['lux'].layout.yaxis.update(axis_style)
+pio.templates['lux'].layout.yaxis.update(
+	mirror=True,
+	ticks='outside',
+	gridcolor='rgba(0, 0, 0, 0.125)',
+	linecolor='rgba(0, 0, 0, 0.125)',
+	zerolinecolor='rgba(0, 0, 0, 0.125)',
+	zeroline=True,
+	showgrid=True,
+	gridwidth=1,
+	zerolinewidth=2,
+)
 pio.templates['lux'].layout.colorway = px.colors.qualitative.Bold + \
 										['#AF0038', '#DDCC77', '#90AD1C'] + \
 										px.colors.qualitative.Light24

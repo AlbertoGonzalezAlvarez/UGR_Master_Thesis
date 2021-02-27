@@ -6,7 +6,7 @@ layout = html.Div(className='d-flex flex-row align-items-center', style=dict(min
 		dbc.Row(className='justify-content-center', children=
 			dbc.Col(md=12, className='text-center', children=[
 				html.I(className='fas fa-cog fa-9x text-logo animation-rotate'),
-				html.Div(className='mb-2 display-4', children='Página en construcción'),
+				html.Div(className='mb-2 mt-3 display-5', children='Página en construcción'),
 				html.A(href='/', children='Volver al inicio')
 			])
 		),

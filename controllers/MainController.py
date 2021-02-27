@@ -1,18 +1,15 @@
-import re
-
-from dash.dependencies import Input, Output, State, MATCH, ClientsideFunction
-from flask import request
+from dash.dependencies import Input, Output, State
 
 import views
 from WebApp import WebApp
-from config import INITIAL_LOCATION_ID, USER_ANGENT_REGEX
+from config import INITIAL_LOCATION_ID
 from controllers import get_page_route
 
 
 @WebApp.callback(
 	Output('page-content', 'children'),
 	Output('page-nav', 'children'),
-	Output('header', 'children'),
+	Output('page-header', 'children'),
 	Input('url', 'pathname'),
 	State('page-nav', 'children'),
 )
@@ -44,39 +41,12 @@ def page_to_render(pathname, menu_links):
 
 
 @WebApp.callback(
-	Output('mobile_device', 'data'),
-	Input('url', 'pathname'),
-	State('mobile_device', 'data')
-)
-def mobile_device(_, data):
-	data = data or {
-		'mobile_device': len(re.findall(USER_ANGENT_REGEX, request.headers['User_Agent'])) > 0
-	}
-
-	return data
-
-
-@WebApp.callback(
 	Output("navbar-collapse", "is_open"),
 	Input("navbar-toggler", "n_clicks"),
+	Input('url', 'pathname'),
 	State("navbar-collapse", "is_open")
 )
-def toggle_navbar_collapse(n, is_open):
+def toggle_navbar_collapse(n, _, is_open):
 	if n:
 		return not is_open
-	return is_open
-
-
-WebApp.clientside_callback(
-	ClientsideFunction(
-		namespace='clientside',
-		function_name='collapse_function'
-	),
-	[
-		Output({'type': 'collapsible-item', 'ref': MATCH}, "is_open"),
-		Output({'type': 'collapse-icon', 'ref': MATCH}, "className")
-	],
-	Input({'type': 'collapse-button', 'ref': MATCH}, "n_clicks"),
-	State({'type': 'collapsible-item', 'ref': MATCH}, "is_open"),
-	prevent_initial_call=True
-)
+	return False

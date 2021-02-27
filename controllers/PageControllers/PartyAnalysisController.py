@@ -207,22 +207,3 @@ def update_monthly_graph(topics, actual_party, figure):
 		return fig, dict(display='block'), dict(display='none'), dict(display='none')
 
 	return figure, dict(display='none'), dict(display='block'), dict(display='block')
-
-
-@WebApp.callback(
-	Output('evolution-mobile-warning', 'style'),
-	Output('evolution-selectors', 'style'),
-	Output('evolution-figures', 'style'),
-	Input('mobile_device', 'modified_timestamp'),
-	State('mobile_device', 'data'),
-	State('evolution-mobile-warning', 'style'),
-)
-def on_mobile_evolution(_, data, warning_style):
-	is_mobile = data['mobile_device']
-
-	if not is_mobile:
-		raise PreventUpdate
-
-	warning_style.update(display='block')
-
-	return warning_style, dict(display='none'), dict(display='none')

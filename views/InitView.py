@@ -24,20 +24,17 @@ layout = [
 			dbc.Col(className='mb-5 bg-white-65 p-4', md=8, children=[
 				html.H2([html.I(className='fas fa-search mr-2'), '¿Que encontraré en la web?']),
 				html.Hr(),
-				html.P(
+				html.P(dcc.Markdown(
 				'''
 					En la web podrás encontrar diferentes análisis que he realizado en base a las temáticas extraídas
 					con un algoritmo de extracción de temas. Podrás conocer el tiempo que dedica cada partido a cada tema,
 					tiempo que dedican los grupos parlamentario a cada tema de forma mensual e incluso datos pormenorizados
 					de cada uno de los diputados. 
-				'''),
-				html.Br(),
-				html.P(
-				'''
+			
 					Este proyecto nace como Trabajo de Final de Máster (TFM) en el que hice estos análisis y decidí buscar
 					la manera de que fueran públicos y accesibles para familiarizarme con diferentes tecnologías web útiles para
 					la presentación y análisis de resultados.
-				'''),
+				''')),
 			]),
 			dbc.Col(className='mb-5 bg-white-65 p-4 ml-2', md=3, children=[
 				html.H2([html.I(className='fas fa-user mr-2'), 'Sobre mi']),

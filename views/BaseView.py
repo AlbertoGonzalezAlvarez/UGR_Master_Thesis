@@ -4,12 +4,6 @@ import dash_html_components as html
 
 from config import APP_LOGO, PAGE_ROUTES
 
-MENU_NAV_LINKS = {}
-
-for page in PAGE_ROUTES:
-	MENU_NAV_LINKS[page["id"]] = \
-		dbc.NavLink(page['name'], id=page["id"], href=page["route"], active=False)
-
 layout = html.Div(id='main-div', children=
 	[
 			html.Meta(name='viewport', content='width=device-width, initial-scale=1'),
@@ -17,18 +11,21 @@ layout = html.Div(id='main-div', children=
 				dbc.Col(children=
 					html.A(className='d-inline-flex', href="#", children=
 						dbc.Row(align='center', children=[
-							dbc.NavbarBrand(children=html.Img(id='logo-image', src='assets/media/logo.png', style=dict(height='35px')))
-							],
+							dbc.NavbarBrand(children=html.A(href='/', children=
+								html.Img(id='logo-image', src='assets/media/logo.png', style=dict(height='35px')))
+							)],
 						),
 					),
 				),
 				dbc.NavbarToggler(id='navbar-toggler'),
 				dbc.Collapse(id='navbar-collapse', navbar=True, children=
-					dbc.Nav(id='page-nav', navbar=True, className='ml-auto', children=list(MENU_NAV_LINKS.values()))
+					dbc.Nav(id='page-nav', navbar=True, className='ml-auto', children=[
+						dbc.NavLink(page['name'], id=page['id'], href=page['route'], active=False) for page in PAGE_ROUTES]
+					)
 				)
 			]),
 			dcc.Location(id='url', refresh=False),
-			html.Header(id='header'),
+			html.Header(id='page-header'),
 			html.Div(
 				id='page-content',
 				className='text-justify container-fluid'
@@ -41,6 +38,5 @@ layout = html.Div(id='main-div', children=
 					]
 				)
 			),
-			dcc.Store(id='mobile_device', storage_type='session'),
 	]
 )
