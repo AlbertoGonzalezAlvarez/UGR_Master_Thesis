@@ -1,5 +1,5 @@
 .bg-green {
-    background-color: #4ca16eba !important;
+    background-color: rgb(76 161 110 / 0.73) !important
 }
 
 .text-green {
@@ -12,7 +12,19 @@
     height: 24px;
 }
 
+[data-toggle='collapse'][aria-expanded='true'] .far:before {
+  content: '\f146';
+}
 
+[data-toggle='collapse'][aria-expanded='false'] .far:before {
+    content: '\f0fe';
+}
+
+.display-5 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1;
+}
 
 .bg-white-65 {
   background-color: rgb(255 255 255 / 0.65) !important;
