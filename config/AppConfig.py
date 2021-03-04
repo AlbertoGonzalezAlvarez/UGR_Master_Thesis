@@ -1,52 +1,40 @@
 import os
+import json
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+JSON_CONFIG = 'config/config.json'
 CUSTOM_STYLES = 'assets/css/custom_styles.css'
-APP_LOGO = "https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/bar-chart-512.png"
-
-EXTERNAL_STYLESHEETS = ['https://use.fontawesome.com/releases/v5.8.1/css/all.css']
-EXTERNAL_SCRIPTS = ['https://code.jquery.com/jquery-3.5.1.min.js']
-
-APP_TITLE = 'Anali.sys'
-USER_ANGENT_REGEX = '(?i)adnroid|fennec|iemobile|iphone|opera (?:mini|mobi)|mobile'
-INITIAL_LOCATION_ID = 'inicio'
 
 PAGE_ROUTES = (
 	{'id': 'inicio', 'route': '/inicio', 'name': 'Inicio'},
 	{'id': 'analisis-partidos', 'route': '/analisis-partidos', 'name': 'Análisis de partidos'},
 	{'id': 'analisis-diputados', 'route': '/analisis-diputados', 'name': 'Análisis de diputados'}
 )
+INITIAL_PAGE_ID = 'inicio'
 
-ORG_CONFIG = {
-	'PSOE': {'extended_name': 'Partido Socialista', 'gp_name': 'G.P. SOCIALISTA', 'color': 'rgb(217, 83, 79)', 'is_party': True},
-	'PP': {'extended_name': 'Partido Popular', 'gp_name': 'G.P. POPULAR', 'color': 'rgb(31, 155, 207)', 'is_party': True},
-	'IU-LV': {'extended_name': 'Izquierda Unida-Los Verdes', 'gp_name': 'G.P. IZQUIERDA UNIDA', 'color': 'rgb(75, 191, 115)', 'is_party': True},
-	'NO_PARTY': {'extended_name': 'Invitados', 'gp_name': 'No parlamentario', 'color': 'rgb(182, 182, 4)', 'is_party': False}
-}
+with open('./config/config.json', encoding='utf-8') as config_file:
+	APP_CONFIG = json.load(config_file)
 
-PARTY_CONFIG = {org_id: ORG_CONFIG[org_id] for org_id in ORG_CONFIG if ORG_CONFIG[org_id]['is_party']}
+APP_TITLE = APP_CONFIG['app_config']['app_title']
+EXTERNAL_STYLESHEETS = APP_CONFIG['app_config']['external_stylesheets']
+EXTERNAL_SCRIPTS = APP_CONFIG['app_config']['external_scripts']
 
-SEX_CONFIG = {
-	'H': {'name': 'Hombre', 'color':  '#778AAE'},
-	'M': {'name': 'Mujer', 'color':  '#862A16'},
-}
-
-TOPIC_NAMES = {
-	'Transportes': 'rgb(127, 60, 141)',
-	'Patrimonio': 'rgb(17, 165, 121)',
-	'Sanidad': 'rgb(57, 105, 172)',
-	'Acceso a la vivienda': 'rgb(242, 183, 1)',
-	'Justicia': 'rgb(231, 63, 116)',
-	'TV pública': 'rgb(128, 186, 90)',
-	'Actividad parlamentaria': 'rgb(230, 131, 16)',
-	'Protección social': 'rgb(0, 134, 149)',
-	'Cultura': 'rgb(207, 28, 144)',
-	'Agricultura': 'rgb(249, 123, 114)',
-	'Educación': 'rgb(165, 170, 153)',
-	'Crítica parlamentaria': '#AF0038',
-	'Transparencia': '#DDCC77',
-	'Legislación': '#90AD1C',
-	'Economía': '#FD3216'
-}
-
+TOPIC_NAMES = list(APP_CONFIG['topic_data'].keys())
+TOPIC_COLORS = list(APP_CONFIG['topic_data'].values())
 N_TOPICS = len(TOPIC_NAMES)
+
+__ABBREVS__ = APP_CONFIG['organization_data']['org_abbrevs']
+__ORG_IS_PARTY__ = APP_CONFIG['organization_data']['org_is_party']
+__EXTENDED_NAMES__ = APP_CONFIG['organization_data']['extended_names']
+__GP_NAMES__ = APP_CONFIG['organization_data']['gp_names']
+__COLORS__ = APP_CONFIG['organization_data']['colors']
+
+PARTY_ABBREVS = [party for idx, party in enumerate(__ABBREVS__) if __ORG_IS_PARTY__[idx]]
+NO_PARTY_ABBREVS = [party for idx, party in enumerate(__ABBREVS__) if not __ORG_IS_PARTY__[idx]]
+ORG_EXTENDED_NAMES = {party: __EXTENDED_NAMES__[idx] for idx, party in enumerate(__ABBREVS__)}
+GP_NAMES = {party: __GP_NAMES__[idx] for idx, party in enumerate(__ABBREVS__)}
+ORG_COLORS = {party: __COLORS__[idx] for idx, party in enumerate(__ABBREVS__)}
+
+SEX_ABBREVS = list(APP_CONFIG['sex_data'].keys())
+SEX_NAMES = {sex: APP_CONFIG['sex_data'][sex]['name'] for idx, sex in enumerate(SEX_ABBREVS)}
+SEX_COLORS = {sex: APP_CONFIG['sex_data'][sex]['color'] for idx, sex in enumerate(SEX_ABBREVS)}
