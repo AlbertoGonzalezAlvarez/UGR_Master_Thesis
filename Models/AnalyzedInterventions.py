@@ -33,7 +33,7 @@ def get_n_woman_deputies():
 		       .divide(get_n_deputies(), fill_value=0.0) * 100
 
 
-def topic_distribution_per_party():
+def get_topic_distribution_per_party():
 	org_topic_distribution = analyzed_interventions[[*Config.TOPIC_NAMES, 'organizacion']] \
 		.groupby('organizacion', as_index=False).mean()
 
@@ -44,12 +44,12 @@ def topic_distribution_per_party():
 	return unpivoted_topic_distribution
 
 
-def topic_distribution_per_sex():
+def get_topic_distribution_per_sex():
 	distribution_per_sex = analyzed_interventions[[*Config.TOPIC_NAMES, 'sexo']].groupby('sexo', as_index=False).mean()
 	return pd.melt(distribution_per_sex, id_vars=['sexo'], var_name='topic', value_name='score')
 
 
-def max_time_per_topic():
+def get_max_time_per_topic():
 	selected_cols = ['predominant_topic', 'organizacion', 'diputado', 'fecha', *Config.TOPIC_TIMES]
 	longest_intervention_time_idx_topic = analyzed_interventions[Config.TOPIC_TIMES].idxmax()
 	max_time_per_topic_df = analyzed_interventions[selected_cols].iloc[longest_intervention_time_idx_topic]
@@ -58,7 +58,7 @@ def max_time_per_topic():
 	return max_time_per_topic_df
 
 
-def monthly_topics():
+def get_monthly_evolution_topics():
 	formatted_dates = analyzed_interventions.fecha.dt.strftime("%B-%Y").transform(string.capwords)
 
 	monthly_topic_scores = analyzed_interventions.groupby([formatted_dates, 'organizacion'], sort=False)[Config.TOPIC_NAMES]

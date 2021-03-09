@@ -18,7 +18,7 @@ header = html.Header(className='bg-green py-5 mb-5', children=
 	)
 )
 layout = [
-	html.Video(id='init-video', autoPlay=True, muted=True, loop=True, src='Assets/media/data_science.mp4'),
+	html.Video(id='init-video', autoPlay=True, muted=True, loop=True, src='assets/media/data_science.mp4'),
 	dbc.Container([
 		dbc.Row(className='justify-content-around', children=[
 			dbc.Col(className='mb-5 bg-white-65 p-4', md=8, children=[
@@ -26,31 +26,33 @@ layout = [
 				html.Hr(),
 				html.P(dcc.Markdown(
 				'''
+					Este proyecto es la continuación de mi Trabajo de Final de Máster (TFM) en el que analicé todas 
+					las intervenciones del parlamento andaluz de la VIII legislatura. La idea de esta web es presentar
+					los estudios e información que he extraído de forma que sea accesible para la sociedad a la vez que
+					familiarizarme con *frameworks* para la construcción de aplicaciones webs.
+					
 					En la web podrás encontrar diferentes análisis que he realizado en base a las temáticas extraídas
-					con un algoritmo de extracción de temas. Podrás conocer el tiempo que dedica cada partido a cada tema,
-					tiempo que dedican los grupos parlamentario a cada tema de forma mensual e incluso datos pormenorizados
-					de cada uno de los diputados. 
-			
-					Este proyecto nace como Trabajo de Final de Máster (TFM) en el que hice estos análisis y decidí buscar
-					la manera de que fueran públicos y accesibles para familiarizarme con diferentes tecnologías web útiles para
-					la presentación y análisis de resultados.
+					con un algoritmo probabilístco que permite la extracción de temas a partir de un conjunto de
+					documentos. En esta página podrás conocer algunos de los estudios y análisis que he realizado tras
+					identificar los temas en las intervenciones de los diputados.
 				''')),
 			]),
 			dbc.Col(className='mb-5 bg-white-65 p-4 ml-2', md=3, children=[
 				html.H2([html.I(className='fas fa-user mr-2'), 'Sobre mi']),
 				html.Hr(),
-				html.P('Soy Alberto González Álvarez, graduado en Ingeniería Informática en la ULL y máster en Ciencia de Datos en la UGR. '),
+				html.P('Soy Alberto González Álvarez, graduado en Ingeniería Informática en la ULL y máster en '
+				       'Ciencia de Datos en la UGR. '),
 				html.P(children=[
 					html.I(className='fab fa-github-square mr-2 align-self-center'),
-					html.A('GitHub', href='https://github.com/AlberTJ97/analysis')
+					html.A('GitHub', href='https://github.com/AlberTJ97/analysis', target='_blank')
 				]),
 				html.P(children=[
 					html.I(className='fab fa-linkedin mr-2 align-self-center'),
-					html.A('LinkedIn', href='https://www.linkedin.com/in/alberto-gonzalez-alvarez/')
+					html.A('LinkedIn', href='https://www.linkedin.com/in/alberto-gonzalez-alvarez/', target='_blank')
 				]),
 				html.P(children=[
 					html.I(className='fas fa-envelope mr-2 align-self-center'),
-					html.A('alberjga97@gmail.com', href='mailto:alberjga97@gmail.com')
+					html.A('alberjga97@gmail.com', href='mailto:alberjga97@gmail.com', target='_blank')
 				]),
 			]),
 		]),

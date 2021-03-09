@@ -14,7 +14,7 @@ from Models import AnalyzedInterventions
 
 
 def build_topic_chart():
-	data = AnalyzedInterventions.topic_distribution_per_party()
+	data = AnalyzedInterventions.get_topic_distribution_per_party()
 
 	figures = [
 		go.Bar(
@@ -37,7 +37,7 @@ def build_topic_chart():
 
 
 def build_woman_vs_man_chart():
-	data = AnalyzedInterventions.topic_distribution_per_sex()
+	data = AnalyzedInterventions.get_topic_distribution_per_sex()
 
 	figures = [
 		go.Bar(
@@ -66,13 +66,13 @@ def build_woman_vs_man_chart():
 
 
 def build_topic_chart_duration():
-	data = AnalyzedInterventions.max_time_per_topic()
+	data = AnalyzedInterventions.get_max_time_per_topic()
 
 	figure = go.Bar(
 		x=data['predominant_topic'],
 		y=data['score'],
 		marker_color=AppConfig.TOPIC_COLORS,
-		customdata=list(zip(data['fecha'], data['diputado'].str.replace('-', ' ').apply([str.title]), data['organizacion'])),
+		customdata=list(zip(data['fecha'], data['diputado'].str.replace('-', ' ').apply(str.title), data['organizacion'])),
 		hovertemplate=
 		'<b>Tema: %{x}</b><br><br>' +
 		'Fecha: %{customdata[0]|%d-%m-%y}<br>' +
@@ -93,7 +93,7 @@ def build_topic_chart_duration():
 
 
 def topic_scores_per_month():
-	data = AnalyzedInterventions.monthly_topics()
+	data = AnalyzedInterventions.get_monthly_evolution_topics()
 
 	dates = data['fecha'].unique()
 	figures = []

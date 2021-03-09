@@ -36,7 +36,7 @@ pio.templates['lux'].layout.colorway = px.colors.qualitative.Bold + \
 pio.templates['lux'].layout.annotations = [
 	dict(
 		text='@AlbertoTJ97',
-		opacity=0.2,
+		opacity=0.1,
 		font=dict(color='black', size=32),
 		bgcolor='white',
 		xref='x domain',
