@@ -1,2 +1,2 @@
-from controllers.PageControllers import *
-from controllers.Utils import *
+from .MainController import *
+from .PageControllers import *
