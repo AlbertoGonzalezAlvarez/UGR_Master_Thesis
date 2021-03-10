@@ -8,7 +8,7 @@ from dash.exceptions import PreventUpdate
 from plotly import graph_objs as go
 
 from utils import rgb_to_rgba
-from WebApp import WebApp
+from WebApplication import WebApp
 from config import AppConfig
 from models import AnalyzedInterventions
 
