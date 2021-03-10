@@ -7,10 +7,10 @@ from dash.dependencies import Output, Input, MATCH, ALL, State
 from dash.exceptions import PreventUpdate
 from plotly import graph_objs as go
 
-from Utils import rgb_to_rgba
+from utils import rgb_to_rgba
 from WebApp import WebApp
-from Config import AppConfig
-from Models import AnalyzedInterventions
+from config import AppConfig
+from models import AnalyzedInterventions
 
 
 def build_topic_chart():

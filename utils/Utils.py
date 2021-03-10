@@ -1,4 +1,4 @@
-from Config import PAGE_ROUTES, CUSTOM_STYLES, TOPIC_NAMES, ROOT_DIR
+from config import PAGE_ROUTES, CUSTOM_STYLES, TOPIC_NAMES, ROOT_DIR
 
 
 def rgb_to_rgba(rgb_value, alpha):

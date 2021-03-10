@@ -313,4 +313,4 @@ dmypy.json
 
 # End of https://www.toptal.com/developers/gitignore/api/jetbrains,pycharm,python
 .idea/misc.xml
-/Assets/css/custom_styles-base.css
+/assets/css/custom_styles-base.css

@@ -2,10 +2,10 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 
-import Controllers
-import Utils
-from Config import PARTY_ABBREVS, ORG_EXTENDED_NAMES, GP_NAMES, TOPIC_NAMES
-from Models import AnalyzedInterventions
+import controllers
+import utils
+from config import PARTY_ABBREVS, ORG_EXTENDED_NAMES, GP_NAMES, TOPIC_NAMES
+from models import AnalyzedInterventions
 
 party_charts = [
 	{
@@ -13,7 +13,7 @@ party_charts = [
 		'title': 'Temas hablados por partido',
 		'info': ''' En la siguiente gráfica se puede ver el porcentaje de tiempo que 
 					dedican los partidos a los diferentes temas que se tratan. ''',
-		'figure': Controllers.build_topic_chart()
+		'figure': controllers.build_topic_chart()
 	},
 	{
 		'id': 'topic-chart-woman-vs-man',
@@ -21,7 +21,7 @@ party_charts = [
 		'info': ''' A continuación mostraremos si hay diferencias entre los temas que hablan las 
 					mujeres y los hombres independientemente del partido. Están incluidas las 
 					intervenciones de personas invitadas al parlamento. ''',
-		'figure': Controllers.build_woman_vs_man_chart()
+		'figure': controllers.build_woman_vs_man_chart()
 	},
 	{
 		'id': 'topic-chart-duration',
@@ -33,7 +33,7 @@ party_charts = [
 
 				*\* teniendo en cuenta una velocidad de 140 palabras por minuto.*
 		    ''',
-		'figure': Controllers.build_topic_chart_duration()
+		'figure': controllers.build_topic_chart_duration()
 	}
 ]
 
@@ -157,7 +157,7 @@ party_evolution = dbc.Row(className='justify-content-center mb-4', children=
 															{
 																'label': topic,
 															    'value': idx,
-																'title': Utils.filter_special_characters(topic)
+																'title': utils.filter_special_characters(topic)
 															} for idx, topic in enumerate(TOPIC_NAMES)
 														],
 													multi=True,
@@ -201,7 +201,7 @@ party_evolution = dbc.Row(className='justify-content-center mb-4', children=
 															{
 																'label': topic,
 															    'value': idx,
-																'title': Utils.filter_special_characters(topic)
+																'title': utils.filter_special_characters(topic)
 															 } for idx, topic in enumerate(TOPIC_NAMES)
 														],
 														multi=True,
@@ -232,7 +232,7 @@ party_evolution = dbc.Row(className='justify-content-center mb-4', children=
 												),
 												dcc.Graph(
 													id={'id': 'monthly-data', 'loc': 'left'},
-													figure=Controllers.topic_scores_per_month(),
+													figure=controllers.topic_scores_per_month(),
 													style=dict(display='None')
 												),
 											]
@@ -253,7 +253,7 @@ party_evolution = dbc.Row(className='justify-content-center mb-4', children=
 												),
 												dcc.Graph(
 													id={'id': 'monthly-data', 'loc': 'right'},
-													figure=Controllers.topic_scores_per_month(),
+													figure=controllers.topic_scores_per_month(),
 													style=dict(display='None')
 												)
 											]

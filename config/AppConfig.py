@@ -2,8 +2,8 @@ import os
 import json
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-JSON_CONFIG = 'Config/Config.json'
-CUSTOM_STYLES = 'Assets/css/custom_styles.css'
+JSON_CONFIG = 'config/config.json'
+CUSTOM_STYLES = 'assets/css/custom_styles.css'
 
 PAGE_ROUTES = (
 	{'id': 'inicio', 'route': '/inicio', 'name': 'Inicio'},
@@ -12,7 +12,7 @@ PAGE_ROUTES = (
 )
 INITIAL_PAGE_ID = 'inicio'
 
-with open('./Config/Config.json', encoding='utf-8') as config_file:
+with open('./config/config.json', encoding='utf-8') as config_file:
 	APP_CONFIG = json.load(config_file)
 
 APP_TITLE = APP_CONFIG['app_config']['app_title']

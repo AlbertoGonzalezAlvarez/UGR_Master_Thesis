@@ -1,7 +1,7 @@
 from dash import dash
 
-from Config import AppConfig
-from Views import BaseView
+from config import AppConfig
+from views import BaseView
 from waitress import serve
 
 WebApp = dash.Dash(
@@ -16,7 +16,7 @@ WebApp = dash.Dash(
 WebApp.layout = BaseView.layout
 server = WebApp.server
 
-from Controllers.MainController import *
+from controllers.MainController import *
 
 if __name__ == "__main__":
 	serve(WebApp.server, host='0.0.0.0', port=80, threads=4)

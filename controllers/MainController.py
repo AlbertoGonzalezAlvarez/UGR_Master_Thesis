@@ -1,9 +1,9 @@
 from dash.dependencies import Input, Output, State
 
-import Views
+import views
 from WebApp import WebApp
-from Config import INITIAL_PAGE_ID
-from Utils import get_page_route
+from config import INITIAL_PAGE_ID
+from utils import get_page_route
 
 
 @WebApp.callback(
@@ -15,20 +15,20 @@ from Utils import get_page_route
 )
 def page_to_render(pathname, menu_links):
 	if pathname == '/' or pathname == '' or pathname == get_page_route(INITIAL_PAGE_ID):
-		header = Views.InitView.header
-		layout = Views.InitView.layout
+		header = views.InitView.header
+		layout = views.InitView.layout
 		actual_location = 'inicio'
 	elif pathname == get_page_route('analisis-partidos'):
 		header = None
-		layout = Views.PartyAnalysisView.layout
+		layout = views.PartyAnalysisView.layout
 		actual_location = 'analisis-partidos'
 	elif pathname == get_page_route('analisis-diputados'):
 		header = None
-		layout = Views.WorkingView.layout
+		layout = views.WorkingView.layout
 		actual_location = 'analisis-diputados'
 	else:
 		header = None
-		layout = Views.NotFoundView.layout
+		layout = views.NotFoundView.layout
 		actual_location = None
 
 	for menu_item in menu_links:

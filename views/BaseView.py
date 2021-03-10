@@ -2,7 +2,7 @@ import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 import dash_html_components as html
 
-from Config import APP_LOGO, PAGE_ROUTES
+from config import APP_LOGO, PAGE_ROUTES
 
 layout = html.Div(id='main-div', children=
 	[
