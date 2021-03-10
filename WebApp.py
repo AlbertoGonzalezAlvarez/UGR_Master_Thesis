@@ -19,5 +19,4 @@ server = WebApp.server
 from Controllers.MainController import *
 
 if __name__ == "__main__":
-	# WebApp.run_server(debug=True, port=80)
 	serve(WebApp.server, host='0.0.0.0', port=80, threads=4)
