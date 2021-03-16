@@ -6,14 +6,14 @@ JSON_CONFIG = 'config/config.json'
 CUSTOM_STYLES = 'assets/css/custom_styles.css'
 
 PAGE_ROUTES = (
-	{'id': 'inicio', 'route': '/inicio', 'name': 'Inicio'},
-	{'id': 'analisis-partidos', 'route': '/analisis-partidos', 'name': 'Análisis de partidos'},
-	{'id': 'analisis-diputados', 'route': '/analisis-diputados', 'name': 'Análisis de diputados'}
+    {'id': 'inicio', 'route': '/inicio', 'name': 'Inicio'},
+    {'id': 'analisis-partidos', 'route': '/analisis-partidos', 'name': 'Análisis de partidos'},
+    {'id': 'analisis-diputados', 'route': '/analisis-diputados', 'name': 'Análisis de diputados'}
 )
 INITIAL_PAGE_ID = 'inicio'
 
 with open('./config/config.json', encoding='utf-8') as config_file:
-	APP_CONFIG = json.load(config_file)
+    APP_CONFIG = json.load(config_file)
 
 APP_TITLE = APP_CONFIG['app_config']['app_title']
 APP_LOGO = APP_CONFIG['app_config']['logo']
