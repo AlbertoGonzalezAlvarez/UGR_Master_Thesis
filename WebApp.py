@@ -16,7 +16,7 @@ WebApp = dash.Dash(
 WebApp.layout = BaseView.layout
 server = WebApp.server
 
-from controllers.MainController import *
+from controllers import *
 
 if __name__ == "__main__":
 	serve(WebApp.server, host='0.0.0.0', port=80, threads=4)
