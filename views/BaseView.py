@@ -34,7 +34,10 @@ layout = html.Div(id='main-div', children=
                 html.Div(className='text-center', children=
                     [
                         'Made with ❤️ by ',
-                        html.A(href='https://www.linkedin.com/in/alberto-gonzalez-alvarez/', children='Alberto González')
+                        html.A(
+                            className='text-white',
+                            href='https://www.linkedin.com/in/alberto-gonzalez-alvarez/', children='Alberto González'
+                        )
                     ]
                 )
             ),
