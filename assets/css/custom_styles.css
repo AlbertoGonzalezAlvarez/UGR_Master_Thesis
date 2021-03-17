@@ -1,5 +1,17 @@
-.bg-green {
-    background-color: rgb(76 161 110 / 0.73) !important
+#overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    background: radial-gradient(ellipse at bottom, rgb(255, 255, 255) 0%, rgba(3, 23, 5, 0.51) 100%);
+    background: -moz-radial-gradient(ellipse at bottom, rgb(255, 255, 255) 0%, rgba(3, 23, 5, 0.51) 100%);
+    z-index: -1;
+}
+
+.bg-green-65 {
+    background-color: rgba(76, 161, 110, 0.65) !important;
 }
 
 .text-green {
@@ -26,8 +38,12 @@
     line-height: 1;
 }
 
+.bg-white-75 {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+}
+
 .bg-white-65 {
-  background-color: rgb(255 255 255 / 0.65) !important;
+  background-color: rgba(255, 255, 255, 0.65) !important;
 }
 
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
@@ -89,15 +105,14 @@
     width: 100%;
     height: 60px;
     line-height: 60px;
-    background-color: #e8e8e8;
+    background-color: black;
+    color: white;
     z-index: 1;
 }
 
 #main-div{
     height: 100vh;
     margin: 0px;
-    display: flex;
-    flex-direction: column;
 }
 
 .container,
@@ -117,7 +132,7 @@
     line-height: 0;
 }
 
-.input-group button.btn-secondary.dropdown-toggle:active, 
+.input-group button.btn-secondary.dropdown-toggle:active,
 .input-group button.btn-secondary.dropdown-toggle:focus {
     box-shadow: 0 0 0 0.2rem rgba(26, 26, 26, 0.25) !important;
 }
@@ -125,7 +140,6 @@
 
 .input-group .dash-dropdown {
     margin-left: 3px;
-    -ms-flex: 1;
     flex: 1;
 }
 
@@ -164,6 +178,7 @@
 
 .Select--multi .Select-input {
     display: flex;
+    display: -webkit-flex;
     margin-right: 25px;
 }
 
@@ -202,6 +217,7 @@
 
 .Select--multi .Select-multi-value-wrapper, .Select-arrow {
     display: flex;
+    display: -webkit-flex;
     flex-grow: 1;
     flex-wrap: wrap;
 }
@@ -285,7 +301,7 @@
 }
 
 .Select--multi .Select-value {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
     border: none;
     color: #5a595c;
     display: inline;
@@ -309,7 +325,7 @@
 }
 
 .Select-value[title=Transportes] {
-    background-color: rgb(127, 60, 141); 
+    background-color: rgb(127, 60, 141);
 }
 
 .Select-value[title=Transportes] > .Select-value-icon {
@@ -318,11 +334,11 @@
 }
 
 .Select-value[title=Transportes] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Patrimonio] {
-    background-color: rgb(17, 165, 121); 
+    background-color: rgb(17, 165, 121);
 }
 
 .Select-value[title=Patrimonio] > .Select-value-icon {
@@ -331,11 +347,11 @@
 }
 
 .Select-value[title=Patrimonio] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Sanidad] {
-    background-color: rgb(57, 105, 172); 
+    background-color: rgb(57, 105, 172);
 }
 
 .Select-value[title=Sanidad] > .Select-value-icon {
@@ -344,11 +360,11 @@
 }
 
 .Select-value[title=Sanidad] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Accesoalavivienda] {
-    background-color: rgb(242, 183, 1); 
+    background-color: rgb(242, 183, 1);
 }
 
 .Select-value[title=Accesoalavivienda] > .Select-value-icon {
@@ -357,11 +373,11 @@
 }
 
 .Select-value[title=Accesoalavivienda] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Justicia] {
-    background-color: rgb(231, 63, 116); 
+    background-color: rgb(231, 63, 116);
 }
 
 .Select-value[title=Justicia] > .Select-value-icon {
@@ -370,11 +386,11 @@
 }
 
 .Select-value[title=Justicia] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=TVpublica] {
-    background-color: rgb(128, 186, 90); 
+    background-color: rgb(128, 186, 90);
 }
 
 .Select-value[title=TVpublica] > .Select-value-icon {
@@ -383,11 +399,11 @@
 }
 
 .Select-value[title=TVpublica] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Actividadparlamentaria] {
-    background-color: rgb(230, 131, 16); 
+    background-color: rgb(230, 131, 16);
 }
 
 .Select-value[title=Actividadparlamentaria] > .Select-value-icon {
@@ -396,11 +412,11 @@
 }
 
 .Select-value[title=Actividadparlamentaria] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Proteccionsocial] {
-    background-color: rgb(0, 134, 149); 
+    background-color: rgb(0, 134, 149);
 }
 
 .Select-value[title=Proteccionsocial] > .Select-value-icon {
@@ -409,11 +425,11 @@
 }
 
 .Select-value[title=Proteccionsocial] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Agricultura] {
-    background-color: rgb(207, 28, 144); 
+    background-color: rgb(207, 28, 144);
 }
 
 .Select-value[title=Agricultura] > .Select-value-icon {
@@ -422,11 +438,11 @@
 }
 
 .Select-value[title=Agricultura] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Cultura] {
-    background-color: rgb(249, 123, 114); 
+    background-color: rgb(249, 123, 114);
 }
 
 .Select-value[title=Cultura] > .Select-value-icon {
@@ -435,11 +451,11 @@
 }
 
 .Select-value[title=Cultura] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Educacion] {
-    background-color: rgb(165, 170, 153); 
+    background-color: rgb(165, 170, 153);
 }
 
 .Select-value[title=Educacion] > .Select-value-icon {
@@ -448,11 +464,11 @@
 }
 
 .Select-value[title=Educacion] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Criticaparlamentaria] {
-    background-color: #AF0038; 
+    background-color: #AF0038;
 }
 
 .Select-value[title=Criticaparlamentaria] > .Select-value-icon {
@@ -461,11 +477,11 @@
 }
 
 .Select-value[title=Criticaparlamentaria] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Transparencia] {
-    background-color: #DDCC77; 
+    background-color: #DDCC77;
 }
 
 .Select-value[title=Transparencia] > .Select-value-icon {
@@ -474,11 +490,11 @@
 }
 
 .Select-value[title=Transparencia] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Legislacion] {
-    background-color: #90AD1C; 
+    background-color: #90AD1C;
 }
 
 .Select-value[title=Legislacion] > .Select-value-icon {
@@ -487,11 +503,11 @@
 }
 
 .Select-value[title=Legislacion] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .Select-value[title=Economia] {
-    background-color: #FD3216; 
+    background-color: #FD3216;
 }
 
 .Select-value[title=Economia] > .Select-value-icon {
@@ -500,6 +516,6 @@
 }
 
 .Select-value[title=Economia] > .Select-value-label {
-    background-color: rgb(255 255 255 / 80%);
+    background-color: rgba(255, 255, 255, 0.8);
 }
 

@@ -1,4 +1,5 @@
 from dash import dash
+from waitress import serve
 
 from config import AppConfig
 from views import BaseView
@@ -18,4 +19,4 @@ server = WebApp.server
 from controllers import *
 
 if __name__ == "__main__":
-    WebApp.run_server(debug=False)
+    serve(WebApp.server, host='0.0.0.0', port=80, threads=4)

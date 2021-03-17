@@ -2,7 +2,7 @@ import dash_html_components as html
 import dash_bootstrap_components as dbc
 import dash_core_components as dcc
 
-header = html.Header(className='bg-green py-5 mb-5', children=
+header = html.Header(className='bg-green-65 py-5', children=
     dbc.Container(className='container-fliud h-100', children=
         dbc.Row(className='h-100 align-items-center', children=
             dbc.Col(lg=12, children=[
@@ -17,11 +17,13 @@ header = html.Header(className='bg-green py-5 mb-5', children=
         )
     )
 )
+
 layout = [
-    html.Video(id='init-video', autoPlay=True, muted=True, loop=True, src='assets/media/data_science.mp4'),
-    dbc.Container([
+    html.Div(id='overlay'),
+    html.Video(id='init-video', autoPlay='autoplay', muted='muted', loop=True, src='assets/media/data_science.mp4'),
+    dbc.Container(className='mt-5', children=[
         dbc.Row(className='justify-content-around', children=[
-            dbc.Col(className='mb-5 bg-white-65 p-4', md=8, children=[
+            dbc.Col(className='mb-5 bg-white-75 p-4', md=8, children=[
                 html.H2([html.I(className='fas fa-search mr-2'), '¿Que encontraré en la web?']),
                 html.Hr(),
                 html.P(dcc.Markdown(
@@ -37,7 +39,7 @@ layout = [
                     identificar los temas en las intervenciones de los diputados.
                 ''')),
             ]),
-            dbc.Col(className='mb-5 bg-white-65 p-4 ml-2', md=3, children=[
+            dbc.Col(className='mb-5 bg-white-75 p-4 ml-2', md=3, children=[
                 html.H2([html.I(className='fas fa-user mr-2'), 'Sobre mi']),
                 html.Hr(),
                 html.P('Soy Alberto González Álvarez, graduado en Ingeniería Informática en la ULL y máster en '
@@ -58,7 +60,7 @@ layout = [
         ]),
         dbc.Row([
             dbc.Col(className='mb-5', md=4, children=[
-                dbc.Card(className='bg-white-65', children=[
+                dbc.Card(className='bg-white-75', children=[
                     dbc.CardImg(src='https://placehold.it/300x200', top=True),
                     dbc.CardBody([
                         html.H4('Card 1', className='card-title'),
@@ -73,7 +75,7 @@ layout = [
                 ])
             ]),
             dbc.Col(className='mb-5', md=4, children=[
-                dbc.Card(className='bg-white-65', children=[
+                dbc.Card(className='bg-white-75', children=[
                     dbc.CardImg(src='https://placehold.it/300x200', top=True),
                     dbc.CardBody([
                         html.H4('Card 2', className='card-title'),
@@ -88,7 +90,7 @@ layout = [
                 ])
             ]),
             dbc.Col(className='mb-5', md=4, children=[
-                dbc.Card(className='bg-white-65', children=[
+                dbc.Card(className='bg-white-75', children=[
                     dbc.CardImg(src='https://placehold.it/300x200', top=True),
                     dbc.CardBody([
                         html.H4('Card 3', className='card-title'),
