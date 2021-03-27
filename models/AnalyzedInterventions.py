@@ -8,7 +8,7 @@ import config
 
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 
-analyzed_interventions = pd.read_json('./assets/analyzed_interventions_separated_cols_w_topic_times.gzip',
+analyzed_interventions = pd.read_json('./assets/reduced_df.gzip',
                                       compression='gzip', convert_dates=['fecha'])
 
 

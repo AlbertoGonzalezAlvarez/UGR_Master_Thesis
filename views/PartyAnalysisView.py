@@ -57,7 +57,7 @@ party_charts_row = dbc.Row(className='justify-content-center mb-4', children=[
             dbc.CardBody(className='d-flex flex-column', children=[
                 html.H5('Información', className='card-title'),
                 html.P(children=dcc.Markdown(chart['info']), className="card-text"),
-                dcc.Graph(id=chart['id'], figure=chart['figure']),
+                dbc.Spinner(color="success", children=dcc.Graph(id=chart['id'], figure=chart['figure'])),
             ])
         ]),
     ]) for chart in party_charts
@@ -150,10 +150,12 @@ party_evolution = dbc.Row(className='justify-content-center mb-4', children=[
                         children='Selecciona al menos un tema y un partido',
                         style=dict(display='block')
                     ),
-                    dcc.Graph(
-                        id={'id': 'monthly-data', 'loc': 'left'},
-                        style=dict(display='None'),
-                        figure=builders.PartyAnalysis.build_topic_distribution_per_month(),
+                    dbc.Spinner(color="success", children=
+                        dcc.Graph(
+                            id={'id': 'monthly-data', 'loc': 'left'},
+                            style=dict(display='None'),
+                            figure=builders.PartyAnalysis.build_topic_distribution_per_month(),
+                        )
                     ),
                 ]
             ),
@@ -171,11 +173,13 @@ party_evolution = dbc.Row(className='justify-content-center mb-4', children=[
                         children='Selecciona al menos un tema y un partido',
                         style=dict(display='block')
                     ),
-                    dcc.Graph(
-                        id={'id': 'monthly-data', 'loc': 'right'},
-                        style=dict(display='None'),
+                    dbc.Spinner(color="success", children=
+                        dcc.Graph(
+                            id={'id': 'monthly-data', 'loc': 'right'},
+                            style=dict(display='None'),
 
-                        figure=builders.PartyAnalysis.build_topic_distribution_per_month(),
+                            figure=builders.PartyAnalysis.build_topic_distribution_per_month(),
+                        )
                     )
                 ]
             )

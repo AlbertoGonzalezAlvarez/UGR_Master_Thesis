@@ -1,7 +1,7 @@
 import dash_html_components as html
 import dash_bootstrap_components as dbc
 
-layout = html.Div(className='d-flex flex-row align-items-center', style=dict(minHeight='88vh'), children=
+layout = html.Div(className='d-flex flex-row align-items-center min-vh-100', children=
     dbc.Container(
         dbc.Row(className='justify-content-center', children=
             dbc.Col(md=12, className='text-center', children=[
