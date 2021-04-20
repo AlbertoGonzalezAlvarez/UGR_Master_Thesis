@@ -4,16 +4,15 @@ import dash_html_components as html
 
 from config import APP_LOGO, PAGE_ROUTES
 
-layout = html.Div(id='main-div', children=
+layout = html.Div(id='main-div', className='d-flex flex-column min-vh-100', children=
     [
             html.Meta(name='viewport', content='width=device-width, initial-scale=1'),
             dbc.Navbar(color='primary', sticky='top', dark=True, expand='lg', children=[
                 dbc.Col(children=
                     html.A(className='d-inline-flex', href="#", children=
-                        dbc.Row(align='center', children=[
-                            dbc.NavbarBrand(children=html.A(href='/', children=
-                                html.Img(id='logo-image', src=APP_LOGO, style=dict(height='35px')))
-                            )],
+                        dbc.Row(align='center', children=html.A(href='/', children=
+                                html.Img(id='logo-image', src=APP_LOGO, style=dict(height='35px'))
+                            ),
                         ),
                     ),
                 ),

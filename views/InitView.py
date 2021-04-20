@@ -61,7 +61,7 @@ layout = [
         dbc.Row([
             dbc.Col(className='mb-5', md=4, children=[
                 dbc.Card(className='bg-white-75', children=[
-                    dbc.CardImg(src='https://placehold.it/300x200', top=True),
+                    dbc.CardImg(src='https://via.placeholder.com/300x200.png', top=True),
                     dbc.CardBody([
                         html.H4('Card 1', className='card-title'),
                         html.P(className='card-text bg-white-50', children=
@@ -76,7 +76,7 @@ layout = [
             ]),
             dbc.Col(className='mb-5', md=4, children=[
                 dbc.Card(className='bg-white-75', children=[
-                    dbc.CardImg(src='https://placehold.it/300x200', top=True),
+                    dbc.CardImg(src='https://via.placeholder.com/300x200.png', top=True),
                     dbc.CardBody([
                         html.H4('Card 2', className='card-title'),
                         html.P(className='card-text bg-white-50', children=
@@ -91,7 +91,7 @@ layout = [
             ]),
             dbc.Col(className='mb-5', md=4, children=[
                 dbc.Card(className='bg-white-75', children=[
-                    dbc.CardImg(src='https://placehold.it/300x200', top=True),
+                    dbc.CardImg(src='https://via.placeholder.com/300x200.png', top=True),
                     dbc.CardBody([
                         html.H4('Card 3', className='card-title'),
                         html.P(className='card-text bg-white-50', children=
